@@ -1,0 +1,140 @@
+/* .attendance{
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    background: hsl(240, 33%, 97%);
+    position: relative;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.attendance:hover{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+
+ */
+
+/* Main Attendance Container */
+.attendance-container {
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+  margin: auto;
+  padding: 20px;
+  border-radius: 8px;
+  background: hsl(240, 33%, 97%);
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.24);
+  position: relative;
+}
+.attendance-container:hover {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.attendance-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Title at Top Left */
+.title {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* Centered Calendar with Sky Blue Background */
+.calendar-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+.react-calendar {
+  width: 90%;
+  height: auto;
+  /* max-width: 600px; */
+  font-weight: bold;
+  background-color: rgb(163, 221, 245) !important;
+  border-radius: 8px;
+  border: 2px solid black;
+  padding: 10px;
+}
+
+/* Bold Numbers */
+.bold-text {
+  font-weight: bold;
+}
+
+/* Weekend Days (Red Font) */
+.weekend {
+  color: red !important;
+}
+
+/* Government Holidays (Orange Font) */
+.govt-holiday {
+  color: orange !important;
+}
+
+/* Position Leave Status Strip Above the Date */
+.date-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Controls */
+.controls {
+  text-align: center;
+  margin-top: 20px;
+}
+.controls p {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.controls button {
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: hsl(226, 36%, 40%);
+  color: white;
+  margin: 5px;
+
+  border-radius: 12px;
+  border: 2px solid white;
+  font-weight: 600;
+}
+
+.controls button:hover {
+  background-color: #0056b3;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+/* Leave Form */
+
+.today-in-out {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.display-time {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* Attendance Present (Violet Strip - Top Left) */
+.attendance-present-strip {
+  width: 50%;
+  height: 3px;
+  background: rgb(25, 173, 25);
+}
+/* Total Time Display */
+.total-time {
+  margin-top: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #000;
+  margin-top: 10px;
+}
