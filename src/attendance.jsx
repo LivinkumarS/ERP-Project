@@ -4,84 +4,192 @@ import "react-calendar/dist/Calendar.css";
 import "./attendance.css";
 
 export default function Attendance() {
+  const [apiData, setApiData] = useState({});
   const [date, setDate] = useState(new Date());
-  const [leaves, setLeaves] = useState({});
-  const [attendance, setAttendance] = useState({});
-  const [totalCheckInTime, setTotalCheckInTime] = useState(0);
   const [checkInOutTimes, setCheckInOutTimes] = useState([]);
+  const [totalCheckInTime, setTotalCheckInTime] = useState(0);
   const [isCheckedIn, setIsCheckedIn] = useState(false);
+  const [governmentHolidays, setGovernmentHolidays] = useState([]);
+  const [attendance, setAttendance] = useState({});
+
+  // const [leaves, setLeaves] = useState({});
 
   // API Data
-
-  const [apiData, setApiData] = useState({
-    data: {
+  const dataFromAPI = {
+    govHolidays: [
+      "2024-01-01",
+      "2024-01-15",
+      "2024-10-31",
+      "2024-12-25",
+      "2025-02-12",
+    ],
+    dateData: {
       "2025-02-01": [
-        "Sat Feb 01 2025 09:00:00 GMT+0530 (India Standard Time)",
-        "Sat Feb 01 2025 18:00:00 GMT+0530 (India Standard Time)",
+        [
+          "Sat Feb 01 2025 09:00:00 GMT+0530 (India Standard Time)",
+          "Sat Feb 01 2025 18:00:00 GMT+0530 (India Standard Time)",
+        ],
+        9.0,
       ],
       "2025-02-02": [
-        "Sun Feb 02 2025 09:15:00 GMT+0530 (India Standard Time)",
-        "Sun Feb 02 2025 17:45:00 GMT+0530 (India Standard Time)",
+        [
+          "Sun Feb 02 2025 09:15:00 GMT+0530 (India Standard Time)",
+          "Sun Feb 02 2025 17:45:00 GMT+0530 (India Standard Time)",
+        ],
+        8.5,
       ],
       "2025-02-03": [
-        "Mon Feb 03 2025 08:55:00 GMT+0530 (India Standard Time)",
-        "Mon Feb 03 2025 17:50:00 GMT+0530 (India Standard Time)",
+        [
+          "Mon Feb 03 2025 08:55:00 GMT+0530 (India Standard Time)",
+          "Mon Feb 03 2025 17:50:00 GMT+0530 (India Standard Time)",
+        ],
+        8.92,
       ],
       "2025-02-14": [
-        "Sat Feb 15 2025 17:54:16 GMT+0530 (India Standard Time)",
-        "Sat Feb 15 2025 17:54:18 GMT+0530 (India Standard Time)",
+        [
+          "Sat Feb 15 2025 17:54:16 GMT+0530 (India Standard Time)",
+          "Sat Feb 15 2025 17:54:18 GMT+0530 (India Standard Time)",
+        ],
+        0.0,
       ],
       "2025-02-15": [
-        "Sat Feb 15 2025 09:05:00 GMT+0530 (India Standard Time)",
-        "Sat Feb 15 2025 18:10:00 GMT+0530 (India Standard Time)",
+        [
+          "Sat Feb 15 2025 09:05:00 GMT+0530 (India Standard Time)",
+          "Sat Feb 15 2025 18:10:00 GMT+0530 (India Standard Time)",
+        ],
+        9.08,
       ],
-      "2025-02-16": null,
-      "2025-02-17": null,
-      "2025-02-18": null,
-      "2025-02-19": null,
-      "2025-02-20": null,
-      "2025-02-21": null,
-      "2025-02-22": null,
-      "2025-02-23": null,
-      "2025-02-24": null,
-      "2025-02-25": null,
-      "2025-02-26": null,
-      "2025-02-27": null,
-      "2025-02-28": null,
+      "2025-02-16": [[], 0],
+      "2025-02-17": [[], 0],
+      "2025-02-18": [[], 0],
+      "2025-02-19": [[], 0],
+      "2025-02-20": [[], 0],
+      "2025-02-21": [[], 0],
+      "2025-02-22": [[], 0],
+      "2025-02-23": [[], 0],
+      "2025-02-24": [[], 0],
+      "2025-02-25": [[], 0],
+      "2025-02-26": [[], 0],
+      "2025-02-27": [[], 0],
+      "2025-02-28": [[], 0],
     },
-  });
-
-  // Total Time Calc
+  };
 
   useEffect(() => {
-    if (!checkInOutTimes) {
-      setTotalCheckInTime(0);
+    setApiData(dataFromAPI);
+  }, []);
+
+  useEffect(() => {
+    const setupPresentDates = () => {
+      for (let ele in apiData.dateData) {
+        if (apiData.dateData[ele][1] > 8) {
+          setAttendance((prev) => {
+            return { ...prev, [ele]: "present" };
+          });
+        }
+      }
+    };
+    if (Object.keys(apiData).length > 0) {
+      setGovernmentHolidays(apiData.govHolidays);
+      setupPresentDates();
+    }
+  }, [apiData]);
+
+  useEffect(() => {
+    if (Object.keys(apiData).length > 0) {
+      const dateString = date.toISOString().split("T")[0];
+      if (apiData.dateData[dateString]) {
+        setCheckInOutTimes(apiData.dateData[dateString][0]);
+        setTotalCheckInTime(apiData.dateData[dateString][1]);
+      } else {
+        setCheckInOutTimes([]);
+        setTotalCheckInTime(0);
+      }
+    }
+  }, [date, apiData]);
+
+  // Detect window close and perform checkout
+  useEffect(() => {
+    const handleUnload = () => {
+      checkoutUser();
+    };
+
+    window.addEventListener("beforeunload", handleUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleUnload);
+    };
+  }, [isCheckedIn, checkInOutTimes]);
+  // Auto-checkout at midnight
+  useEffect(() => {
+    const now = new Date();
+    const midnight = new Date();
+    midnight.setHours(24, 0, 0, 0); // Set to next midnight
+
+    const timeUntilMidnight = midnight - now; // Time left until midnight
+
+    const resetTimeout = setTimeout(() => {
+      checkoutUser();
+
+      // Reset daily data after 5 seconds
+      setTimeout(() => {
+        setCheckInOutTimes([]);
+        setTotalCheckInTime(0);
+      }, 5000);
+
+      // Schedule the next midnight reset
+      const dailyReset = setInterval(() => {
+        checkoutUser();
+        setTimeout(() => {
+          setCheckInOutTimes([]);
+          setTotalCheckInTime(0);
+        }, 5000);
+      }, 86400000);
+
+      return () => clearInterval(dailyReset);
+    }, timeUntilMidnight);
+
+    return () => clearTimeout(resetTimeout);
+  }, [isCheckedIn, checkInOutTimes]);
+
+  const handleCheckInOut = () => {
+    const now = new Date();
+    const currentDateString = now.toISOString().split("T")[0];
+
+    // Prevent checking in/out for past dates
+    if (date.toISOString().split("T")[0] !== currentDateString) {
+      alert("You can only check-in & check-out on today's date.");
       return;
     }
 
-    let totalActiveTime = 0;
+    setCheckInOutTimes((prevTimes) => {
+      const updatedTimes = [...prevTimes, now.toString()];
 
-    // Convert timestamp strings to Date objects
-    let times = checkInOutTimes.map((ts) => new Date(ts));
+      setApiData((prev) => {
+        return {
+          ...prev,
+          [currentDateString]: [
+            updatedTimes,
+            prev[currentDateString]?.[1] || 0,
+          ], // Preserve previous total time
+        };
+      });
 
-    // Calculate time differences for every check-in/check-out pair
-    for (let i = 0; i < times.length - 1; i += 2) {
-      totalActiveTime += (times[i + 1] - times[i]) / (1000 * 60 * 60);
-    }
+      let totalActiveTime = 0;
+      const times = updatedTimes.map((ts) => new Date(ts));
 
-    setTotalCheckInTime(totalActiveTime);
+      // Calculate active time from check-in/check-out pairs
+      for (let i = 0; i < times.length - 1; i += 2) {
+        totalActiveTime += (times[i + 1] - times[i]) / (1000 * 60 * 60);
+      }
 
-    // Mark user as present if check-in time is >= 8 hours
-    if (totalActiveTime >= 0.0001) {
+      setTotalCheckInTime(totalActiveTime);
 
-      setAttendance((prev) => ({
-        ...prev,
-        [date]: "present",
-      }));
-    }
-  }, [checkInOutTimes]);
+      setIsCheckedIn(!isCheckedIn);
+      return updatedTimes;
+    });
+  };
 
-  // Set Date
   const handleSetDate = (dateValue) => {
     dateValue.setMinutes(
       dateValue.getMinutes() - dateValue.getTimezoneOffset()
@@ -89,37 +197,6 @@ export default function Attendance() {
     setDate(dateValue);
   };
 
-  useEffect(() => {
-    setCheckInOutTimes(apiData.data[date.toISOString().split("T")[0]]);
-  }, [date]);
-
-  // Government holidays (Example dates)
-  const governmentHolidays = [
-    "2024-01-01", // New Year
-    "2024-01-15", // Pongal
-    "2024-10-31", // Deepavali
-    "2024-12-25", // Christmas
-    "2025-02-12",
-  ];
-
-  // Reset daily data at midnight
-  useEffect(() => {
-    const resetDailyData = setInterval(() => {
-      setCheckInOutTimes([]);
-      setTotalCheckInTime(0);
-      setIsCheckedIn(false);
-    }, 86400000);
-
-    return () => clearInterval(resetDailyData);
-  }, []);
-
-  useEffect(() => {
-    const now = new Date();
-    const currentDateString = now.toISOString().split("T")[0];
-    setCheckInOutTimes(apiData.data[currentDateString]);
-  }, []);
-
-  // Function to determine the class for each calendar tile
   const getTileClass = ({ date }) => {
     date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
     const dateString = date.toISOString().split("T")[0];
@@ -139,72 +216,18 @@ export default function Attendance() {
     return className;
   };
 
-  // Show Leave/Attendance Status Strip on Top Left
   const tileContent = ({ date }) => {
     date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
     const dateString = date.toISOString().split("T")[0];
 
     return (
       <div className="date-container">
-        {/* Leave Status */}
-        {leaves[dateString] === "pending" && (
-          <div className="leave-pending-strip"></div>
-        )}
-        {leaves[dateString] === "approved" && (
-          <div className="leave-approved-strip"></div>
-        )}
-
         {/* Attendance Status */}
         {attendance[dateString] === "present" && (
           <div className="attendance-present-strip"></div>
         )}
       </div>
     );
-  };
-
-  // Handle Check-in and Check-out
-  const handleCheckInOut = () => {
-    const now = new Date();
-    const currentDateString = now.toISOString().split("T")[0];
-
-
-    if (date.toISOString().split("T")[0] !== currentDateString) {
-      alert("You can only check-in & check-out on today's date.");
-      return;
-    }
-
-    setCheckInOutTimes((prevTimes) => {
-      const updatedTimes = [...prevTimes, now.toString()];
-      setApiData((prev) => {
-        let temp = prev;
-        temp.data[currentDateString] = updatedTimes;
-        return temp;
-      });
-
-      let totalActiveTime = 0;
-
-      // Convert timestamp strings to Date objects
-      let times = updatedTimes.map((ts) => new Date(ts));
-
-      // Calculate time differences for every check-in/check-out pair
-      for (let i = 0; i < times.length - 1; i += 2) {
-        totalActiveTime += (times[i + 1] - times[i]) / (1000 * 60 * 60);
-      }
-
-      setTotalCheckInTime(totalActiveTime);
-
-      // Mark user as present if check-in time is >= 8 hours
-      if (totalActiveTime >= 0.0001) {
-
-        setAttendance((prev) => ({
-          ...prev,
-          [currentDateString]: "present",
-        }));
-      }
-
-      setIsCheckedIn(!isCheckedIn);
-      return updatedTimes;
-    });
   };
 
   return (
