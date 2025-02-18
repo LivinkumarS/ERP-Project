@@ -72,3 +72,12 @@
     nav.hovered:hover p{
         color: white;
     }
+    nav.activeNav .logo{
+        fill: white;
+    }
+    
+    nav.activeNav p{
+        color: white;
+    }
+
+    

@@ -111,7 +111,9 @@ export default function Attendance() {
   // Detect window close and perform checkout
   useEffect(() => {
     const handleUnload = () => {
-      checkoutUser();
+      if (isCheckedIn) {
+        handleCheckInOut();
+      }
     };
 
     window.addEventListener("beforeunload", handleUnload);
@@ -120,37 +122,10 @@ export default function Attendance() {
       window.removeEventListener("beforeunload", handleUnload);
     };
   }, [isCheckedIn, checkInOutTimes]);
+
   // Auto-checkout at midnight
-  useEffect(() => {
-    const now = new Date();
-    const midnight = new Date();
-    midnight.setHours(24, 0, 0, 0); // Set to next midnight
 
-    const timeUntilMidnight = midnight - now; // Time left until midnight
-
-    const resetTimeout = setTimeout(() => {
-      checkoutUser();
-
-      // Reset daily data after 5 seconds
-      setTimeout(() => {
-        setCheckInOutTimes([]);
-        setTotalCheckInTime(0);
-      }, 5000);
-
-      // Schedule the next midnight reset
-      const dailyReset = setInterval(() => {
-        checkoutUser();
-        setTimeout(() => {
-          setCheckInOutTimes([]);
-          setTotalCheckInTime(0);
-        }, 5000);
-      }, 86400000);
-
-      return () => clearInterval(dailyReset);
-    }, timeUntilMidnight);
-
-    return () => clearTimeout(resetTimeout);
-  }, [isCheckedIn, checkInOutTimes]);
+  // yet to code
 
   const handleCheckInOut = () => {
     const now = new Date();
@@ -168,10 +143,13 @@ export default function Attendance() {
       setApiData((prev) => {
         return {
           ...prev,
-          [currentDateString]: [
-            updatedTimes,
-            prev[currentDateString]?.[1] || 0,
-          ], // Preserve previous total time
+          dateData: {
+            ...prev.dateData,
+            [currentDateString]: [
+              updatedTimes,
+              prev.dateData[currentDateString]?.[1] || 0,
+            ],
+          },
         };
       });
 
@@ -184,6 +162,13 @@ export default function Attendance() {
       }
 
       setTotalCheckInTime(totalActiveTime);
+
+      setApiData((prev) => {
+        const updatedDateString = prev;
+        updatedDateString.dateData[currentDateString][1] = totalActiveTime;
+
+        return updatedDateString;
+      });
 
       setIsCheckedIn(!isCheckedIn);
       return updatedTimes;
@@ -254,7 +239,7 @@ export default function Attendance() {
       {/* Display Check-in & Check-out Times */}
       <div className="checkin-times">
         <p className="today-in-out">Today's Check-in & Check-out</p>
-        {checkInOutTimes ? (
+        {checkInOutTimes.length != 0 ? (
           checkInOutTimes.map((time, index) => (
             <p className="display-time" key={index}>
               {index % 2 === 0 ? "Check-in" : "Check-out"}:{" "}

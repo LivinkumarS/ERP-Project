@@ -10,7 +10,7 @@ function App() {
  
   return (
     <div className="ERC">
-      <Dashboard expanded={expanded} setCurrentPage={setCurrentPage}/>
+      <Dashboard expanded={expanded} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
       <Body expanded={expanded} setexpanded={setexpanded} currentPage={currentPage}  />
     </div>
   );
