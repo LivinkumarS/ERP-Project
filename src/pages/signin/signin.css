@@ -1,0 +1,112 @@
+
+.signin-page{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    background:hsl(226, 36%, 40%);
+}
+.welcome{
+    font-size: 35px;
+    color: #fff;
+    font-weight: 600;
+    padding-bottom: 10px;
+}
+.signin-cointained{
+    border: 2px solid white;
+    backdrop-filter: blur(5px);
+    padding: 40px;
+    border-radius: 10px;
+}
+.signin-cointained p{
+    color: white;
+    padding-bottom: 10px;
+}
+.signin-img{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+.signin-img img{
+    width: 80%;
+    height: auto;  
+}
+.signin-form{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.user-logo, .lock-logo{
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    fill: hsl(0, 0%, 50%);
+}
+.username-cointainer, .password-cointainer{
+    border: 3px solid hsl(0, 0%, 80%);
+    border-radius: 10px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 13px;
+    min-width:270px ;
+    color: #fff;
+    background:hsl(0, 0%, 100%);
+}
+.username, .password{
+    background: transparent;
+    border: 0;
+    color: gray;
+    font-size: 15px;
+    font-weight: 500;
+}
+.username:focus, .password:focus{
+    outline: 0;
+}
+.openeye-logo, .closeeye-logo{
+    width: 20px;
+    height: 20px;
+    fill: hsl(0, 0%, 60%);
+    margin-left: 15px;
+    cursor: pointer;
+}
+.openeye-logo{
+    display: none;
+}
+.user-border, .mail-border{
+    border-color: hsl(0, 0%, 20%) ;
+}
+input[type="checkbox"]{
+    accent-color: gray;
+}
+.agree{
+    padding-left: 5px;
+    font-size: 13px;
+    color: #fff;
+}
+.agree a{
+    color: hsl(0, 0%, 70%);
+}
+.agree a:hover{
+    color: #fff;
+}
+.login-button{
+    min-width: 270px;
+    padding: 10px 0px;
+    margin-top: 15px;
+    background-image: linear-gradient(hsl(221, 94%, 61%),hsl(221, 94%, 50%));
+    border: none;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 10px;
+}
+.login-button:hover{
+    background-image:linear-gradient(hsl(221, 94%, 50%), hsl(221, 94%, 61%)) ;
+    
+}

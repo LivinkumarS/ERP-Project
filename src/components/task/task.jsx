@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./task.css";
-import Newtask from "./newtask";
+// import Newtask from "../newtask";
 export default function task() {
   return (
     <div className="taskpage">
@@ -44,13 +44,6 @@ export default function task() {
         <div className="task-box">
           <div className="count">0</div>
           <div className="box-title" id="Awaiting-Feedback">
-            Awaiting Feedback
-          </div>
-          <div className="task-assigned">Tasks assigned to me: 0</div>
-        </div>
-        <div className="task-box">
-          <div className="count">0</div>
-          <div className="box-title" id="complete">
             Awaiting Feedback
           </div>
           <div className="task-assigned">Tasks assigned to me: 0</div>
@@ -100,7 +93,6 @@ export default function task() {
                 ERC
               </div>
               <nav className="edit-cointainer">
-                <div className="start-time">Start time</div>
                 <div className="edit">Edit</div>
                 <div className="delete">Delete</div>
               </nav>
@@ -122,9 +114,6 @@ export default function task() {
             </nav>
             <nav>
               <div className="list-content">High</div>
-              <nav className="edit-cointainer">
-                <div className="edit">Edit</div>
-              </nav>
             </nav>
           </div>
           <div className="light-barline"></div>
@@ -139,7 +128,6 @@ export default function task() {
                 ERC
               </div>
               <nav className="edit-cointainer">
-                <div className="start-time">Start time</div>
                 <div className="edit">Edit</div>
                 <div className="delete">Delete</div>
               </nav>
@@ -161,9 +149,6 @@ export default function task() {
             </nav>
             <nav>
               <div className="list-content">High</div>
-              <nav className="edit-cointainer">
-                <div className="edit">Edit</div>
-              </nav>
             </nav>
           </div>
           <div className="light-barline"></div>

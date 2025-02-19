@@ -1,21 +1,24 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import "./body.css";
-import Attendance from "./attendance";
-import Project from "./project";
-import Task from "./task";
-import Onboard from "./onboard";
-import Payslip from "./payslip";
+import Attendance from "../attendance/attendance";
+import Project from "../project/project";
+import Task from "../task/task";
+import Onboard from "../onboard/onboard";
+import Payslip from "../payslip/payslip";
+import { userContext } from "../../App";
 
 export default function body({ expanded, setexpanded, currentPage }) {
-
-
+  const { userInformation, setUserInformation } = useContext(userContext);
+  console.log(userInformation);
+  
   return (
     <div className={`body-cointainer ${expanded ? "body-long" : ""}`}>
       <div className="header">
         <div className="header-left">
           <svg
-            className={  expanded? "right-arrow right-arrow-rot" : "right-arrow "}
-
+            className={
+              expanded ? "right-arrow right-arrow-rot" : "right-arrow "
+            }
             onClick={() => setexpanded(!expanded)}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 448 512"
@@ -40,13 +43,11 @@ export default function body({ expanded, setexpanded, currentPage }) {
           </div>
         </div>
         <div className="header-right">
-          <svg
-            className="profile-logo"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 448 512"
-          >
-            <path d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464l349.5 0c-8.9-63.3-63.3-112-129-112l-91.4 0c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304l91.4 0C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7L29.7 512C13.3 512 0 498.7 0 482.3z" />
-          </svg>
+          <div className="profile-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+              <path d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464l349.5 0c-8.9-63.3-63.3-112-129-112l-91.4 0c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304l91.4 0C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7L29.7 512C13.3 512 0 498.7 0 482.3z" />
+            </svg>
+          </div>
           <svg
             className="bell-logo"
             xmlns="http://www.w3.org/2000/svg"
@@ -57,7 +58,6 @@ export default function body({ expanded, setexpanded, currentPage }) {
         </div>
       </div>
       <div className="sub-body">
-
         {currentPage == "task" ? (
           <Task />
         ) : currentPage == "attendance" ? (
