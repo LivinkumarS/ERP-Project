@@ -2,17 +2,18 @@ import React, { useContext, useEffect, useState } from "react";
 import Dashboard from "../../components/dashboard/dashboard";
 import Body from "../../components/body/body";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { userContext } from "../../App";
+import { useSelector } from "react-redux";
+import "./userDashboard.css";
 
 export default function userDashboard() {
-  const { userInformation } = useContext(userContext);
+  const { user, isAuthenticated } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (Object.keys(userInformation).length == 0) {
+    if (!isAuthenticated) {
       navigate("/sign-in");
     }
-  }, [userInformation]);
+  }, [isAuthenticated]);
 
   const [searchParam, setSearchParam] = useSearchParams();
 
@@ -24,7 +25,7 @@ export default function userDashboard() {
   }, [searchParam]);
 
   return (
-    <div className="ERC">
+    <div className="userDashboard">
       <Dashboard
         expanded={expanded}
         currentPage={currentPage}

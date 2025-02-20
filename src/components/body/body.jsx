@@ -5,11 +5,9 @@ import Project from "../project/project";
 import Task from "../task/task";
 import Onboard from "../onboard/onboard";
 import Payslip from "../payslip/payslip";
-import { userContext } from "../../App";
+
 
 export default function body({ expanded, setexpanded, currentPage }) {
-  const { userInformation, setUserInformation } = useContext(userContext);
-  console.log(userInformation);
   
   return (
     <div className={`body-cointainer ${expanded ? "body-long" : ""}`}>

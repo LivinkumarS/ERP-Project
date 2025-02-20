@@ -1,9 +1,9 @@
 
-.signin-page{
+.signup-page{
     width: 100vw;
-    height: 100vh;
-    display: flex;
+    min-height: 100vh;
     background:hsl(226, 36%, 40%);
+    padding: 20px;
 }
 .welcome{
     font-size: 35px;
@@ -11,34 +11,27 @@
     font-weight: 600;
     padding-bottom: 10px;
 }
-.signin-cointained{
+.signup-cointained{
     border: 2px solid white;
     backdrop-filter: blur(5px);
     padding: 40px;
     border-radius: 10px;
+    max-width: 800px;
+    width: 100%;
+    margin: auto;
 }
-.signin-cointained p{
+.signup-cointained p{
     color: white;
     padding-bottom: 10px;
 }
-.signin-img{
-    width: 50%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center; 
+.signup-img{
+    text-align: center;
+    margin-bottom: 30px;
 }
-.signin-img img{
-    width: 80%;
+.signup-img img{
+    width: 300px;
+    margin: auto;
     height: auto;  
-}
-.signin-form{
-    width: 50%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 .user-logo, .lock-logo{
     width: 20px;
@@ -59,6 +52,7 @@
     background:hsl(0, 0%, 100%);
 }
 .username, .password{
+    flex: 1;
     background: transparent;
     border: 0;
     color: gray;
@@ -93,7 +87,7 @@ input[type="checkbox"]{
     color: #fff;
 }
 .login-button{
-    min-width: 270px;
+    width: 100%;
     padding: 10px 0px;
     margin-top: 15px;
     background-image: linear-gradient(hsl(221, 94%, 61%),hsl(221, 94%, 50%));
