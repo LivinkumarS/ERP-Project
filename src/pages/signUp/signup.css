@@ -1,9 +1,9 @@
 
 .signup-page{
-    width: 100vw;
+    width: 100%;
     min-height: 100vh;
     background:hsl(226, 36%, 40%);
-    padding: 20px;
+    padding:50px 20px;
 }
 .welcome{
     font-size: 35px;
@@ -47,11 +47,14 @@
     align-items: center;
     padding: 10px;
     margin-bottom: 13px;
-    min-width:270px ;
+    min-width:100% ;
     color: #fff;
     background:hsl(0, 0%, 100%);
 }
-.username, .password{
+.inputdata{
+    width: 100%;
+}
+.username, .password, .inputdata{
     flex: 1;
     background: transparent;
     border: 0;
@@ -59,7 +62,7 @@
     font-size: 15px;
     font-weight: 500;
 }
-.username:focus, .password:focus{
+.username:focus, .password:focus, .inputdata{
     outline: 0;
 }
 .openeye-logo, .closeeye-logo{
@@ -100,4 +103,19 @@ input[type="checkbox"]{
 .login-button:hover{
     background-image:linear-gradient(hsl(221, 94%, 50%), hsl(221, 94%, 61%)) ;
     
+}
+.changer-link{
+    font-size: 14px;
+    color: white;
+    margin-top: 10px;
+    text-align: center;
+} 
+.link{
+    text-decoration: none;
+    color: skyblue;
+}
+@media screen and (max-width:350px) {
+    .signup-img img{
+        width: 250px;
+    }
 }

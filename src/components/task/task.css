@@ -197,3 +197,11 @@
   font-size: 12px;
   margin-top: 50px;
 }
+
+
+
+@media screen and (max-width:350px) {
+  .search-listitem{
+    margin-left: 0;
+  }
+}

@@ -80,4 +80,10 @@
         color: white;
     }
 
-    
+    @media screen and (max-width:1000px) {
+        .logo{
+            min-width: 20px;
+            min-height: 20px;
+        }
+        
+    }

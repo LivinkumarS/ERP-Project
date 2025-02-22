@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./signin.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/authSlice";
 
@@ -117,6 +117,7 @@ export default function signin() {
             <button onClick={handleSignIn} className="login-button">
               Log In
             </button>
+            <p className="changer-link">Don't have an account? <Link to={'/sign-up'} className="link">Sign Up</Link></p>
           </div>
         </div>
       </form>

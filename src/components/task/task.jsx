@@ -154,7 +154,6 @@ export default function task() {
           <div className="light-barline"></div>
         </div>
       </div>
-      <div className="entries">Showing 0 to 0 of 0 entries</div>
     </div>
   );
 }

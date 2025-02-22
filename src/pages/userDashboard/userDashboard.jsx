@@ -4,6 +4,8 @@ import Body from "../../components/body/body";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./userDashboard.css";
+import Sidebar from "../../components/sidebar/sidebar";
+import { use } from "react";
 
 export default function userDashboard() {
   const { user, isAuthenticated } = useSelector((state) => state.auth);
@@ -19,6 +21,7 @@ export default function userDashboard() {
 
   const [expanded, setexpanded] = useState(false);
   const [currentPage, setCurrentPage] = useState("task");
+  const [showSidebar, setShowSidebar] = useState(false);
 
   useEffect(() => {
     setCurrentPage(searchParam.get("tab") || "task");
@@ -31,10 +34,21 @@ export default function userDashboard() {
         currentPage={currentPage}
         setCurrentPage={setSearchParam}
       />
+
+      {showSidebar && (
+        <Sidebar
+          setShowSidebar={setShowSidebar}
+          currentPage={currentPage}
+          setCurrentPage={setSearchParam}
+        />
+      )}
+
       <Body
+        user={user}
         expanded={expanded}
         setexpanded={setexpanded}
         currentPage={currentPage}
+        setShowSidebar={setShowSidebar}
       />
     </div>
   );

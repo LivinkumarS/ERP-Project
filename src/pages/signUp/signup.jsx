@@ -17,8 +17,11 @@ export default function signup() {
   const [password, setPassword] = useState("");
 const [role,setRole]=useState("")
 
-  const [focusname, setfocusname] = useState(false);
+  const [focusname, setfocusName] = useState(false);
+  const [focusphone, setfocusPhone] = useState(false);
+  const [focusjob, setfocusjob] = useState(false);
   const [focusmail, setfocusmail] = useState(false);
+  const [focuspassword, setfocuspassword] = useState(false);
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -41,33 +44,59 @@ const [role,setRole]=useState("")
             <div className="welcome">Welcome to ERC</div>
             <p>Sign up to cointinue</p>
 
-            <input
+            <div className={`username-cointainer ${
+                focusname ? "user-border" : " "
+              }`}
+              onFocus={()=>setfocusName(true)}
+              onBlur={()=>setfocusName(false)}
+              >
+              <input className="inputdata"
+              placeholder="Name"
               type="text"
               value={name}
               onChange={(e) => {
                 setName(e.target.value);
               }}
-            />
+             />
+            </div>
+            
 
-            <input
-              type="number"
-              value={phone}
-              onChange={(e) => {
-                setPhone(e.target.value);
-              }}
-            />
+            <div className={`username-cointainer ${
+                focusphone ? "user-border" : " "
+              }`}
+              onFocus={()=>setfocusPhone(true)}
+              onBlur={()=>setfocusPhone(false)}
+              >
+              <input className="inputdata"
+                placeholder="Phone Number"
+                type="number"
+                value={phone}
+                onChange={(e) => {
+                  setPhone(e.target.value);
+                }}
+              /> 
+            </div>
 
-            <input
+            <div className={`username-cointainer ${
+                focusjob ? "user-border" : " "
+              }`}
+              onFocus={()=>setfocusjob(true)}
+              onBlur={()=>setfocusjob(false)}
+              >
+              <input className="inputdata"
+              placeholder="Job-Role"
               type="text"
               value={role}
               onChange={(e) => {
                 setRole(e.target.value);
               }}
-            />
+              />
+            </div>
+            
 
             <div
               className={`username-cointainer ${
-                focusname ? "user-border" : " "
+                focusmail ? "user-border" : " "
               }`}
             >
               <svg
@@ -79,8 +108,8 @@ const [role,setRole]=useState("")
               </svg>
               <input
                 type="email"
-                onFocus={() => setfocusname(true)}
-                onBlur={() => setfocusname(false)}
+                onFocus={() => setfocusmail(true)}
+                onBlur={() => setfocusmail(false)}
                 className="username"
                 placeholder="E-mail Id"
                 required
@@ -92,7 +121,7 @@ const [role,setRole]=useState("")
             </div>
             <div
               className={`password-cointainer ${
-                focusmail ? "mail-border" : ""
+                focuspassword ? "mail-border" : ""
               }`}
             >
               <svg
@@ -105,8 +134,8 @@ const [role,setRole]=useState("")
               {showPassword ? (
                 <input
                   type={"text"}
-                  onFocus={() => setfocusmail(true)}
-                  onBlur={() => setfocusmail(false)}
+                  onFocus={() => setfocuspassword(true)}
+                  onBlur={() => setfocuspassword(false)}
                   className="password"
                   placeholder="Password"
                   required
@@ -120,8 +149,8 @@ const [role,setRole]=useState("")
               ) : (
                 <input
                   type={"password"}
-                  onFocus={() => setfocusmail(true)}
-                  onBlur={() => setfocusmail(false)}
+                  onFocus={() => setfocuspassword(true)}
+                  onBlur={() => setfocuspassword(false)}
                   className="password"
                   placeholder="Password"
                   required
@@ -169,7 +198,7 @@ const [role,setRole]=useState("")
             <button onClick={handleSignIn} className="login-button">
               Sign Up
             </button>
-            <p className="changer-link">Already Have an Account?<Link to={'/sign-in'}>sign in</Link></p>
+            <p className="changer-link">Already Have an Account? <Link to={'/sign-in'} className="link">sign in</Link></p>
           </div>
         </div>
       </form>

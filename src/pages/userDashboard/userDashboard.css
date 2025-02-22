@@ -2,3 +2,18 @@
     display: flex;
     flex-direction: row;
   }
+  
+
+  @media (max-width:800px) {
+    .userDashboard>div:first-child{
+      display: none;
+    }
+
+    .right-arrow{
+      display: none;
+    }
+
+    .toggler{
+      display: block;
+    }
+  }
