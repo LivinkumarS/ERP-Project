@@ -15,7 +15,8 @@ export default function Attendance() {
   // const [leaves, setLeaves] = useState({});
 
   // API Data
-  const dataFromAPI = {
+
+  const govHolidaysAPI = {
     govHolidays: [
       "2024-01-01",
       "2024-01-15",
@@ -23,6 +24,9 @@ export default function Attendance() {
       "2024-12-25",
       "2025-02-12",
     ],
+  };
+
+  const dateDataAPI = {
     dateData: {
       "2025-02-01": [
         [
@@ -76,7 +80,8 @@ export default function Attendance() {
   };
 
   useEffect(() => {
-    setApiData(dataFromAPI);
+    setApiData(dateDataAPI);
+    setGovernmentHolidays(govHolidaysAPI.govHolidays);
   }, []);
 
   useEffect(() => {
@@ -90,7 +95,6 @@ export default function Attendance() {
       }
     };
     if (Object.keys(apiData).length > 0) {
-      setGovernmentHolidays(apiData.govHolidays);
       setupPresentDates();
     }
   }, [apiData]);

@@ -15,7 +15,7 @@ export default function signup() {
   const [phone, setPhone] = useState("");
   const [userMail, setUserMail] = useState("");
   const [password, setPassword] = useState("");
-const [role,setRole]=useState("")
+  const [role, setRole] = useState("");
 
   const [focusname, setfocusName] = useState(false);
   const [focusphone, setfocusPhone] = useState(false);
@@ -30,6 +30,7 @@ const [role,setRole]=useState("")
       user: { id: 1, name: "John Doe", email: "john@example.com" },
     };
     dispatch(login(userData));
+    toast.success("Signed up successfully!");
     navigate("/");
   }
 
@@ -44,55 +45,58 @@ const [role,setRole]=useState("")
             <div className="welcome">Welcome to ERC</div>
             <p>Sign up to cointinue</p>
 
-            <div className={`username-cointainer ${
+            <div
+              className={`username-cointainer ${
                 focusname ? "user-border" : " "
               }`}
-              onFocus={()=>setfocusName(true)}
-              onBlur={()=>setfocusName(false)}
-              >
-              <input className="inputdata"
-              placeholder="Name"
-              type="text"
-              value={name}
-              onChange={(e) => {
-                setName(e.target.value);
-              }}
-             />
+              onFocus={() => setfocusName(true)}
+              onBlur={() => setfocusName(false)}
+            >
+              <input
+                className="inputdata"
+                placeholder="Name"
+                type="text"
+                value={name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+              />
             </div>
-            
 
-            <div className={`username-cointainer ${
+            <div
+              className={`username-cointainer ${
                 focusphone ? "user-border" : " "
               }`}
-              onFocus={()=>setfocusPhone(true)}
-              onBlur={()=>setfocusPhone(false)}
-              >
-              <input className="inputdata"
+              onFocus={() => setfocusPhone(true)}
+              onBlur={() => setfocusPhone(false)}
+            >
+              <input
+                className="inputdata"
                 placeholder="Phone Number"
                 type="number"
                 value={phone}
                 onChange={(e) => {
                   setPhone(e.target.value);
                 }}
-              /> 
-            </div>
-
-            <div className={`username-cointainer ${
-                focusjob ? "user-border" : " "
-              }`}
-              onFocus={()=>setfocusjob(true)}
-              onBlur={()=>setfocusjob(false)}
-              >
-              <input className="inputdata"
-              placeholder="Job-Role"
-              type="text"
-              value={role}
-              onChange={(e) => {
-                setRole(e.target.value);
-              }}
               />
             </div>
-            
+
+            <div
+              className={`username-cointainer ${focusjob ? "user-border" : ""}`}
+              onFocus={() => setfocusjob(true)}
+              onBlur={() => setfocusjob(false)}
+            >
+              <select
+                className="inputdata"
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+              >
+                <option value="">Select Job Role</option>
+                <option value="Admin">Admin</option>
+                <option value="HR">HR</option>
+                <option value="Project Manager">Project Manager</option>
+              </select>
+            </div>
 
             <div
               className={`username-cointainer ${
@@ -198,7 +202,12 @@ const [role,setRole]=useState("")
             <button onClick={handleSignIn} className="login-button">
               Sign Up
             </button>
-            <p className="changer-link">Already Have an Account? <Link to={'/sign-in'} className="link">sign in</Link></p>
+            <p className="changer-link">
+              Already Have an Account?{" "}
+              <Link to={"/sign-in"} className="link">
+                sign in
+              </Link>
+            </p>
           </div>
         </div>
       </form>

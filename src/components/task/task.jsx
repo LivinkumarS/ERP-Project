@@ -1,11 +1,109 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./task.css";
-// import Newtask from "../newtask";
+import AddTask from "../addTask/addTask";
+import { toast } from "react-toastify";
+
 export default function task() {
+  const [apiData, setApiData] = useState({});
+  const [taskData, setTaskData] = useState([]);
+  const [taskSummary, setTaskSummary] = useState([]);
+
+  const [showForm, setShowForm] = useState(false);
+  const [formCall, setFormCall] = useState("");
+  const [editTaskIndex, setEditTaskIndex] = useState(null);
+
+  const dataFromAPI = {
+    taskData: [
+      {
+        name: "ERC",
+        status: "In Progress",
+        start_date: "Sat Feb 01 2025 09:00:00 GMT+0530 (India Standard Time)",
+        due_date: "Sat Feb 01 2025 09:00:00 GMT+0530 (India Standard Time)",
+        assigned_to: "kamal",
+        priority: "high",
+      },
+      {
+        name: "ESC",
+        status: "In Progress",
+        start_date: "Sat Feb 01 2025 09:00:00 GMT+0530 (India Standard Time)",
+        due_date: "Sat Feb 01 2025 09:00:00 GMT+0530 (India Standard Time)",
+        assigned_to: "kamal",
+        priority: "high",
+      },
+    ],
+    taskSummary: {
+      not_started: 2,
+      in_progress: 2,
+      completed: 0,
+      awaiting_feedback: 3,
+    },
+  };
+
+  useEffect(() => {
+    setApiData(dataFromAPI);
+  }, []);
+
+  useEffect(() => {
+    if (Object.keys(apiData).length > 0) {
+      setTaskData(apiData.taskData);
+      setTaskSummary(apiData.taskSummary);
+    }
+  }, [apiData]);
+
+  function AddNewTask(data) {
+    apiData.taskData.push(data);
+    setFormCall("");
+    toast.success("Task added!");
+  }
+
+  function handleEditSubmit(data) {
+    setApiData((prev) => {
+      return {
+        ...prev,
+        taskData: prev.taskData.map((ele, ind) => {
+          if (ind === editTaskIndex) {
+            return { ...data };
+          }
+
+          return ele;
+        }),
+      };
+    });
+
+    setFormCall("");
+    setEditTaskIndex(null);
+  }
+
+  function deleteTask(ind) {
+    setApiData((prev) => ({
+      ...prev,
+      taskData: prev.taskData.filter((_, index) => index !== ind),
+    }));
+    toast.success("Task deleted!");
+  }
+
   return (
     <div className="taskpage">
+      {showForm && (
+        <AddTask
+          setShowForm={setShowForm}
+          formCall={formCall}
+          AddNewTask={AddNewTask}
+          taskCurrentState={apiData.taskData[editTaskIndex]}
+          handleEditSubmit={handleEditSubmit}
+        />
+      )}
+
       <div className="task-cointainer">
-        <button className="newtask">New Task</button>
+        <button
+          className="newtask"
+          onClick={() => {
+            setShowForm(true);
+            setFormCall("add");
+          }}
+        >
+          New Task
+        </button>
         <div className="taskright-cointainer">
           <button className="task-overview">Task Overview</button>
           <svg
@@ -21,28 +119,28 @@ export default function task() {
       <h2 className="task-title">Task Summery</h2>
       <div className="taskfullbox">
         <div className="task-box">
-          <div className="count">0</div>
+          <div className="count">{taskSummary.not_started}</div>
           <div className="box-title" id="not-started">
             Not Started
           </div>
           <div className="task-assigned">Tasks assigned to me: 0</div>
         </div>
         <div className="task-box">
-          <div className="count">0</div>
+          <div className="count">{taskSummary.in_progress}</div>
           <div className="box-title" id="In-Progress">
             In Progress
           </div>
           <div className="task-assigned">Tasks assigned to me: 0</div>
         </div>
         <div className="task-box">
-          <div className="count">0</div>
+          <div className="count">{taskSummary.completed}</div>
           <div className="box-title" id="testing">
-            Not Started
+            Completed
           </div>
           <div className="task-assigned">Tasks assigned to me: 0</div>
         </div>
         <div className="task-box">
-          <div className="count">0</div>
+          <div className="count">{taskSummary.awaiting_feedback}</div>
           <div className="box-title" id="Awaiting-Feedback">
             Awaiting Feedback
           </div>
@@ -82,76 +180,69 @@ export default function task() {
             <div className="list-title">Priority</div>
           </div>
           <div className="light-barline"></div>
-          <div className="listcontent-cointainer">
-            <nav>
-              <div className="list-content" id="count-num">
-                1
+
+          {/* Data Starting */}
+
+          {taskData.length > 0 ? (
+            taskData.map((ele, ind) => (
+              <div key={ind}>
+                <div className="listcontent-cointainer">
+                  <nav>
+                    <div className="list-content" id="count-num">
+                      {ind + 1}
+                    </div>
+                  </nav>
+                  <nav>
+                    <div className="list-content" id="list-name">
+                      {ele.name}
+                    </div>
+                    <nav className="edit-cointainer">
+                      <div
+                        className="edit"
+                        onClick={() => {
+                          setFormCall("edit");
+                          setEditTaskIndex(ind);
+                          setShowForm(true);
+                        }}
+                      >
+                        Edit
+                      </div>
+                      <div
+                        className="delete"
+                        onClick={() => {
+                          deleteTask(ind);
+                        }}
+                      >
+                        Delete
+                      </div>
+                    </nav>
+                  </nav>
+                  <nav>
+                    <div className="list-content">{ele.status}</div>
+                  </nav>
+                  <nav>
+                    <div className="list-content">
+                      {new Date(ele.start_date).toLocaleDateString()}
+                    </div>
+                  </nav>
+                  <nav>
+                    <div className="list-content">
+                      {new Date(ele.due_date).toLocaleDateString()}
+                    </div>
+                  </nav>
+                  <nav>
+                    <div className="list-content">{ele.assigned_to}</div>
+                  </nav>
+                  <nav>
+                    <div className="list-content">{ele.priority}</div>
+                  </nav>
+                </div>
+                <div className="light-barline"></div>
               </div>
-            </nav>
-            <nav>
-              <div className="list-content" id="list-name">
-                ERC
-              </div>
-              <nav className="edit-cointainer">
-                <div className="edit">Edit</div>
-                <div className="delete">Delete</div>
-              </nav>
-            </nav>
-            <nav>
-              <div className="list-content">In Progress</div>
-              <nav className="edit-cointainer">
-                <div className="edit">Edit</div>
-              </nav>
-            </nav>
-            <nav>
-              <div className="list-content">00/00/00</div>
-            </nav>
-            <nav>
-              <div className="list-content">00/00/00</div>
-            </nav>
-            <nav>
-              <div className="list-content">Kamal</div>
-            </nav>
-            <nav>
-              <div className="list-content">High</div>
-            </nav>
-          </div>
-          <div className="light-barline"></div>
-          <div className="listcontent-cointainer">
-            <nav>
-              <div className="list-content" id="count-num">
-                1
-              </div>
-            </nav>
-            <nav>
-              <div className="list-content" id="list-name">
-                ERC
-              </div>
-              <nav className="edit-cointainer">
-                <div className="edit">Edit</div>
-                <div className="delete">Delete</div>
-              </nav>
-            </nav>
-            <nav>
-              <div className="list-content">In Progress</div>
-              <nav className="edit-cointainer">
-                <div className="edit">Edit</div>
-              </nav>
-            </nav>
-            <nav>
-              <div className="list-content">00/00/00</div>
-            </nav>
-            <nav>
-              <div className="list-content">00/00/00</div>
-            </nav>
-            <nav>
-              <div className="list-content">Kamal</div>
-            </nav>
-            <nav>
-              <div className="list-content">High</div>
-            </nav>
-          </div>
-          <div className="light-barline"></div>
+            ))
+          ) : (
+            <p>No Tasks</p>
+          )}
         </div>
       </div>
     </div>

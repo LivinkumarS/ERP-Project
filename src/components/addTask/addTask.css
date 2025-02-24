@@ -1,0 +1,18 @@
+.addTask-container {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+
+  z-index: 10;
+}
+
+
+
+.addTask-container>svg{
+  width: 30px;
+  cursor:pointer;
+}
