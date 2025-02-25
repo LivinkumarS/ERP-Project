@@ -138,10 +138,3 @@
   color: #000;
   margin-top: 10px;
 }
-
-
-@media (max-width:500px) {
-  .attendance-container{
-    padding: 0;
-  }
-}

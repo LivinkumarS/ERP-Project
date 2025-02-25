@@ -11,6 +11,58 @@
 .taskpage::-webkit-scrollbar {
   display: none;
 }
+
+.filter-cont{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: fit-content;
+  position: relative;
+}
+
+
+.filter-cont>.filter-contents{
+  padding: 10px;
+  border-radius: 12px;
+  flex-direction: column;
+  gap: 10px;
+
+  display: flex;
+  position: absolute;
+  right: 0;
+  bottom: -110px;
+  background-color: #fff;
+  box-shadow: 5px 5px 5px gray;
+}
+
+.filter-cont>.filter-contents>form{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.filter-cont>.filter-contents>form>select{
+  padding: 5px;
+  border-radius: 7px;
+  outline: 0;
+  border: 0;
+  box-shadow: 2px 2px 2px gray;
+
+}
+
+.filter-cont>.filter-contents>form>button{
+  background-color: #0056b3;
+  color: #fff;
+  font-size: small;
+  font-weight: bold;
+  border: 0;
+  padding: 7px 7px;
+  border-radius: 12px;
+
+
+}
+
 .filter-logo {
   width: 33px;
   height: 33px;
