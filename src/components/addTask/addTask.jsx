@@ -46,8 +46,13 @@ export default function addTask({
   function handleSubmit(e) {
     e.preventDefault();
 
-    if(currentForm.name==="" || currentForm.assigned_to==="" || currentForm.due_date==="" || currentForm.start_date==="" || currentForm.priority==="" || currentForm.status===""){
-      return toast.warn("Please Fillout All The Fields")
+    if (
+      currentForm.name === "" ||
+      currentForm.assigned_to === "" ||
+      currentForm.priority === "" ||
+      currentForm.status === ""
+    ) {
+      return toast.warn("Please Fillout All The Fields");
     }
 
     if (formCall === "add") {

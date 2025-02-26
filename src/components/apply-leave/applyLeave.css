@@ -1,0 +1,162 @@
+.apply-leave {
+  width: 100%;
+  height: 100%;
+  padding: 15px;
+  background: hsl(240, 33%, 97%);
+  position: relative;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  overflow: scroll;
+  display: flex;
+}
+.apply-leave:hover {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.apply-leave::-webkit-scrollbar {
+  display: none;
+}
+
+.applyleave-cointainer {
+  width: 50%;
+  height: 100%;
+  padding-left: 5px;
+  padding-right: 20px;
+}
+.remainingleave-cointainer {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-left: 2px solid rgba(128, 128, 128, 0.374);
+}
+
+/* //remaining leave */
+
+.remainingleave-cointainer > h3,
+.applyleave-cointainer > h3 {
+  width: 100%;
+  text-align: center;
+  font-size: 25px;
+  font-weight: 600;
+}
+.yearly-leave-cointainer,
+.monthly-leave-cointainer {
+  width: 100%;
+  height: auto;
+  padding: 20px;
+}
+.yearly-leave-cointainer > p,
+.monthly-leave-cointainer > p {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.tot-leave-y {
+  font-size: 16px;
+}
+.sick-leave-y,
+.casual-leave-y {
+  font-size: 16px;
+}
+.sick-leave-y > p,
+.casual-leave-y > p {
+  font-size: 12px;
+  display: inline;
+  color: gray;
+}
+
+/* Apply leave */
+
+.applyleave-cointainer > nav {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.leave-date {
+  width: fit-content;
+  height: auto;
+  padding: 20px;
+}
+.leave-date > div {
+  display: flex;
+  padding-bottom: 15px;
+  align-items: center;
+}
+.leave-date > div > nav,
+.reason-cointainer > div {
+  font-size: 16px;
+  font-weight: 500;
+}
+.leave-date > div > input,
+.leave-date > div > select {
+  padding: 5px;
+  margin-left: 5px;
+  background: hsla(0, 0%, 100%, 0.492);
+  border-radius: 5px;
+  border: 1px solid #41528a;
+}
+.leave-date > div > input:focus,
+.leave-date > div > select:focus {
+  outline: 1px solid #41528a;
+}
+.leave-radio {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+.leave-radio label {
+  padding-top: 5px;
+}
+.reason-cointainer > textarea {
+  margin-top: 5px;
+  width: 100%;
+  height: auto;
+  min-height: 120px;
+  border: 2px solid gray;
+  border-radius: 10px;
+  padding: 5px;
+}
+.reason-cointainer > button {
+  padding: 10px 20px;
+  margin-top: 20px;
+  min-width: 100px;
+  background-image: linear-gradient(#0056b3, #405189);
+  border: 2px solid hsl(0, 0%, 50%);
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+}
+.reason-cointainer > button:hover {
+  background-image: linear-gradient(#405189, #0056b3);
+}
+
+@media (max-width: 1200px) {
+  .applyleave-cointainer {
+    height: 110%;
+  }
+}
+@media (max-width: 900px) {
+  .apply-leave {
+    flex-direction: column;
+  }
+  .applyleave-cointainer {
+    width: 100%;
+    padding: 0;
+  }
+  .remainingleave-cointainer {
+    width: 100%;
+    border: 0;
+  }
+  .remainingleave-cointainer > h3 {
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 2px solid rgba(128, 128, 128, 0.374);
+  }
+}
+@media (max-width: 350px) {
+  .leave-date {
+    padding: 20px 0;
+  }
+}

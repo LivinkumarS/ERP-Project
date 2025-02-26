@@ -5,6 +5,7 @@ import Project from "../project/project";
 import Task from "../task/task";
 import Onboard from "../onboard/onboard";
 import Payslip from "../payslip/payslip";
+import ApplyLeave from "../apply-leave/applyLeave";
 import { logout } from "../../redux/authSlice";
 import { useDispatch } from "react-redux";
 
@@ -100,8 +101,10 @@ export default function body({
           <Onboard />
         ) : currentPage == "project" ? (
           <Project />
-        ) : (
+        ) : currentPage == "payslip" ? (
           <Payslip />
+        ) : (
+          <ApplyLeave />
         )}
       </div>
     </div>

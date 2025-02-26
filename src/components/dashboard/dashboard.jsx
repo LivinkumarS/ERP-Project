@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./dashboard.css";
 
 export default function Dashboard({ expanded, setCurrentPage, currentPage }) {
-  
-
   return (
     <div className={`dashboard-container ${expanded ? "dashboard-short" : ""}`}>
       <div className="sitelogo">
@@ -23,7 +21,7 @@ export default function Dashboard({ expanded, setCurrentPage, currentPage }) {
         <nav
           className={`hovered ${currentPage === "task" && "activeNav"}`}
           onClick={() => {
-            setCurrentPage({tab:"task"});
+            setCurrentPage({ tab: "task" });
           }}
         >
           <svg
@@ -38,7 +36,7 @@ export default function Dashboard({ expanded, setCurrentPage, currentPage }) {
         <nav
           className={`hovered ${currentPage === "attendance" && "activeNav"}`}
           onClick={() => {
-            setCurrentPage({tab:"attendance"});
+            setCurrentPage({ tab: "attendance" });
           }}
         >
           <svg
@@ -53,7 +51,7 @@ export default function Dashboard({ expanded, setCurrentPage, currentPage }) {
         <nav
           className={`hovered ${currentPage === "onboarding" && "activeNav"}`}
           onClick={() => {
-            setCurrentPage({tab:"onboarding"});
+            setCurrentPage({ tab: "onboarding" });
           }}
         >
           <svg
@@ -68,7 +66,7 @@ export default function Dashboard({ expanded, setCurrentPage, currentPage }) {
         <nav
           className={`hovered ${currentPage === "project" && "activeNav"}`}
           onClick={() => {
-            setCurrentPage({tab:"project"});
+            setCurrentPage({ tab: "project" });
           }}
         >
           <svg
@@ -83,7 +81,7 @@ export default function Dashboard({ expanded, setCurrentPage, currentPage }) {
         <nav
           className={`hovered ${currentPage === "payslip" && "activeNav"}`}
           onClick={() => {
-            setCurrentPage({tab:"payslip"});
+            setCurrentPage({ tab: "payslip" });
           }}
         >
           <svg
@@ -94,6 +92,21 @@ export default function Dashboard({ expanded, setCurrentPage, currentPage }) {
             <path d="M192 0c-41.8 0-77.4 26.7-90.5 64L64 64C28.7 64 0 92.7 0 128L0 448c0 35.3 28.7 64 64 64l256 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64l-37.5 0C269.4 26.7 233.8 0 192 0zm0 64a32 32 0 1 1 0 64 32 32 0 1 1 0-64zM72 272a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm104-16l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zM72 368a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm88 0c0-8.8 7.2-16 16-16l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16z" />
           </svg>
           {!expanded && <p>Payslip Generator</p>}
+        </nav>
+        <nav
+          className={`hovered ${currentPage === "applyLeave" && "activeNav"}`}
+          onClick={() => {
+            setCurrentPage({ tab: "applyLeave" });
+          }}
+        >
+          <svg
+            className="task logo"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 576 512"
+          >
+            <path d="M0 64C0 28.7 28.7 0 64 0L224 0l0 128c0 17.7 14.3 32 32 32l128 0 0 128-168 0c-13.3 0-24 10.7-24 24s10.7 24 24 24l168 0 0 112c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 64zM384 336l0-48 110.1 0-39-39c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l80 80c9.4 9.4 9.4 24.6 0 33.9l-80 80c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l39-39L384 336zm0-208l-128 0L256 0 384 128z" />
+          </svg>
+          {!expanded && <p>Apply Leave</p>}
         </nav>
       </div>
     </div>

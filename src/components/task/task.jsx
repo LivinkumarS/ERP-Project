@@ -76,11 +76,15 @@ export default function task() {
   }
 
   function deleteTask(ind) {
-    setApiData((prev) => ({
-      ...prev,
-      taskData: prev.taskData.filter((_, index) => index !== ind),
-    }));
-    toast.success("Task deleted!");
+    const okDel = window.confirm("Are you sure you want to delete this task?");
+
+    if (okDel) {
+      setApiData((prev) => ({
+        ...prev,
+        taskData: prev.taskData.filter((_, index) => index !== ind),
+      }));
+      toast.success("Task deleted!");
+    }
   }
 
   return (
@@ -241,12 +245,16 @@ export default function task() {
                   </nav>
                   <nav>
                     <div className="list-content">
-                      {new Date(ele.start_date).toLocaleDateString()}
+                      {ele.start_date !== ""
+                        ? new Date(ele.start_date).toLocaleDateString()
+                        : "-"}
                     </div>
                   </nav>
                   <nav>
                     <div className="list-content">
-                      {new Date(ele.due_date).toLocaleDateString()}
+                      {ele.start_date !== ""
+                        ? new Date(ele.due_date).toLocaleDateString()
+                        : "-"}
                     </div>
                   </nav>
                   <nav>
