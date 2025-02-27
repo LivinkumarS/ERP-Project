@@ -157,7 +157,7 @@ export default function applyLeave() {
           <div className="reason-cointainer">
             <div>Reason</div>
             <textarea
-              placeholder="Reasonn for applying leave..."
+              placeholder="Reason for applying leave..."
               required
               id="message"
               name="message"
@@ -173,10 +173,10 @@ export default function applyLeave() {
             <p>Total number of Leave available from April to March</p>
             <div className="tot-leave-y">Total Leave = 24</div>
             <div className="sick-leave-y">
-              Sick Leave = 12 <p> // two days per month only</p>
+              Sick Leave = 12 <p> // One days per month only</p>
             </div>
             <div className="casual-leave-y">
-              Casual Leave = 12 <p> // two days per month only</p>
+              Casual Leave = 12 <p> // One days per month only</p>
             </div>
           </div>
           <div className="monthly-leave-cointainer">

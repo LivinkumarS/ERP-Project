@@ -37,7 +37,7 @@ export default function signin() {
         </div>
         <div className="signin-form">
           <div className="signin-cointained">
-            <div className="welcome">Welcome to ERC</div>
+            <div className="welcome">Welcome to ERP</div>
             <p>Sign in to cointinue</p>
             <div
               className={`username-cointainer ${

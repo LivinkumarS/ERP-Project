@@ -10,3 +10,27 @@
 .payslip:hover {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
+
+.select-Y-M-cointainer div {
+  font-size: 20px;
+  font-weight: 700;
+  color: #2b3a67;
+  padding-bottom: 10px;
+  padding: 20px 0 10px 0;
+}
+.search-Y-M {
+  display: flex;
+  align-items: center;
+}
+.Y-M {
+  width: 300px;
+  height: 30px;
+  padding: 7px;
+  cursor: pointer;
+  border-radius: 7px;
+  background: #fff;
+  border: 0px;
+}
+.Y-M:focus {
+  outline: 2px solid hsl(226, 36%, 39%);
+}

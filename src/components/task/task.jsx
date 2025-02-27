@@ -139,7 +139,7 @@ export default function task() {
         </div>
       </div>
       <div className="bar-line"></div>
-      <h2 className="task-title">Task Summery</h2>
+      <h2 className="task-title">Task Summary</h2>
       <div className="taskfullbox">
         <div className="task-box">
           <div className="count">{taskSummary.not_started}</div>
