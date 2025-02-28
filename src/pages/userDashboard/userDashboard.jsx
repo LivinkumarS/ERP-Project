@@ -1,11 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Dashboard from "../../components/dashboard/dashboard";
 import Body from "../../components/body/body";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./userDashboard.css";
 import Sidebar from "../../components/sidebar/sidebar";
-import { use } from "react";
 
 export default function userDashboard() {
   const { user, isAuthenticated } = useSelector((state) => state.auth);
