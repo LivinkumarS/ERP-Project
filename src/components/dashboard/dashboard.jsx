@@ -21,7 +21,7 @@ export default function Dashboard({ expanded, setCurrentPage, currentPage }) {
         <nav
           className={`hovered ${currentPage === "task" && "activeNav"}`}
           onClick={() => {
-            setCurrentPage({ tab: "task" });
+            setCurrentPage("task");
           }}
         >
           <svg
@@ -36,7 +36,7 @@ export default function Dashboard({ expanded, setCurrentPage, currentPage }) {
         <nav
           className={`hovered ${currentPage === "attendance" && "activeNav"}`}
           onClick={() => {
-            setCurrentPage({ tab: "attendance" });
+            setCurrentPage("attendance");
           }}
         >
           <svg
@@ -51,7 +51,7 @@ export default function Dashboard({ expanded, setCurrentPage, currentPage }) {
         <nav
           className={`hovered ${currentPage === "onboarding" && "activeNav"}`}
           onClick={() => {
-            setCurrentPage({ tab: "onboarding" });
+            setCurrentPage("onboarding");
           }}
         >
           <svg
@@ -66,7 +66,7 @@ export default function Dashboard({ expanded, setCurrentPage, currentPage }) {
         <nav
           className={`hovered ${currentPage === "project" && "activeNav"}`}
           onClick={() => {
-            setCurrentPage({ tab: "project" });
+            setCurrentPage("project");
           }}
         >
           <svg
@@ -81,7 +81,7 @@ export default function Dashboard({ expanded, setCurrentPage, currentPage }) {
         <nav
           className={`hovered ${currentPage === "payslip" && "activeNav"}`}
           onClick={() => {
-            setCurrentPage({ tab: "payslip" });
+            setCurrentPage("payslip");
           }}
         >
           <svg
@@ -96,7 +96,7 @@ export default function Dashboard({ expanded, setCurrentPage, currentPage }) {
         <nav
           className={`hovered ${currentPage === "applyLeave" && "activeNav"}`}
           onClick={() => {
-            setCurrentPage({ tab: "applyLeave" });
+            setCurrentPage("applyLeave");
           }}
         >
           <svg

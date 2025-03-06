@@ -85,7 +85,7 @@ export default function body({
                 <p>{user.email}</p>
                 <h4
                   onClick={() => {
-                    setCurrentPage("user-profile");
+                    setCurrentPage("userProfile");
                   }}
                 >
                   Profile

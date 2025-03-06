@@ -12,31 +12,36 @@ export default function userDashboard() {
   const [searchParam, setSearchParam] = useSearchParams();
 
   const [expanded, setexpanded] = useState(false);
-  const [currentPage, setCurrentPage] = useState("task");
+  const [currentPage, setCurrentPage] = useState("");
   const [showSidebar, setShowSidebar] = useState(false);
 
   useEffect(() => {
     setCurrentPage(searchParam.get("tab") || "task");
   }, [searchParam]);
 
+  const updateCurrentPage = (tab) => {
+    setSearchParam({ tab });
+    setCurrentPage(tab);
+  };
+
   return isAuthenticated ? (
     <div className="userDashboard">
       <Dashboard
         expanded={expanded}
         currentPage={currentPage}
-        setCurrentPage={setSearchParam}
+        setCurrentPage={updateCurrentPage}
       />
 
       {showSidebar && (
         <Sidebar
           setShowSidebar={setShowSidebar}
           currentPage={currentPage}
-          setCurrentPage={setSearchParam}
+          setCurrentPage={updateCurrentPage}
         />
       )}
 
       <Body
-        setCurrentPage={setCurrentPage}
+        setCurrentPage={updateCurrentPage}
         user={user}
         expanded={expanded}
         setexpanded={setexpanded}

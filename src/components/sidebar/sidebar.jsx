@@ -15,7 +15,7 @@ export default function sidebar({
       <nav
         className={`hovered ${currentPage === "task" && "activeNav"}`}
         onClick={() => {
-          setCurrentPage({ tab: "task" });
+          setCurrentPage("task");
           setShowSidebar(false);
         }}
       >
@@ -30,7 +30,7 @@ export default function sidebar({
       <nav
         className={`hovered ${currentPage === "attendance" && "activeNav"}`}
         onClick={() => {
-          setCurrentPage({ tab: "attendance" });
+          setCurrentPage("attendance");
           setShowSidebar(false);
         }}
       >
@@ -45,7 +45,7 @@ export default function sidebar({
       <nav
         className={`hovered ${currentPage === "onboarding" && "activeNav"}`}
         onClick={() => {
-          setCurrentPage({ tab: "onboarding" });
+          setCurrentPage("onboarding");
           setShowSidebar(false);
         }}
       >
@@ -60,7 +60,7 @@ export default function sidebar({
       <nav
         className={`hovered ${currentPage === "project" && "activeNav"}`}
         onClick={() => {
-          setCurrentPage({ tab: "project" });
+          setCurrentPage("project");
           setShowSidebar(false);
         }}
       >
@@ -75,7 +75,7 @@ export default function sidebar({
       <nav
         className={`hovered ${currentPage === "payslip" && "activeNav"}`}
         onClick={() => {
-          setCurrentPage({ tab: "payslip" });
+          setCurrentPage("payslip");
           setShowSidebar(false);
         }}
       >
@@ -90,7 +90,7 @@ export default function sidebar({
       <nav
         className={`hovered ${currentPage === "applyLeave" && "activeNav"}`}
         onClick={() => {
-          setCurrentPage({ tab: "applyLeave" });
+          setCurrentPage("applyLeave");
           setShowSidebar(false);
         }}
       >
