@@ -1,20 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Dashboard from "../../components/dashboard/dashboard";
 import Body from "../../components/body/body";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Navigate, useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./userDashboard.css";
 import Sidebar from "../../components/sidebar/sidebar";
 
 export default function userDashboard() {
   const { user, isAuthenticated } = useSelector((state) => state.auth);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!isAuthenticated) {
-      navigate("/sign-in");
-    }
-  }, [isAuthenticated]);
 
   const [searchParam, setSearchParam] = useSearchParams();
 
@@ -26,7 +19,7 @@ export default function userDashboard() {
     setCurrentPage(searchParam.get("tab") || "task");
   }, [searchParam]);
 
-  return (
+  return isAuthenticated ? (
     <div className="userDashboard">
       <Dashboard
         expanded={expanded}
@@ -43,6 +36,7 @@ export default function userDashboard() {
       )}
 
       <Body
+        setCurrentPage={setCurrentPage}
         user={user}
         expanded={expanded}
         setexpanded={setexpanded}
@@ -50,5 +44,7 @@ export default function userDashboard() {
         setShowSidebar={setShowSidebar}
       />
     </div>
+  ) : (
+    <Navigate to={"/sign-in"} />
   );
 }

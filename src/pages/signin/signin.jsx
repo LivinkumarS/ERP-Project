@@ -22,7 +22,14 @@ export default function signin() {
 
   function handleSignIn() {
     const userData = {
-      user: { id: 1, name: "John Doe", email: "john@example.com" },
+      user: {
+        id: 1,
+        name: "John Doe",
+        email: "john@example.com",
+        profilePic: "https://m.media-amazon.com/images/I/51T6MpbpQLL.jpg",
+        jobRole: "Project manager",
+        mobile: "98897887676",
+      },
     };
     dispatch(login(userData));
     toast.success("Signed in successfully!");
