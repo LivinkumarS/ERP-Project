@@ -10,9 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 export default function App() {
   return (
     <BrowserRouter>
-      <div>
-        <ToastContainer position="top-right" autoClose={3000} />
-      </div>
+      <ToastContainer position="top-right" autoClose={3000} />
       <Routes>
         <Route path="/sign-in" element={<Signin />} />
         <Route path="/sign-up" element={<Signup />} />

@@ -1,0 +1,16 @@
+.profilePicture{
+    width: 300px;
+    aspect-ratio: 1/1;
+    object-position: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+input{
+    border: 0ch;
+    outline: 0;
+}
+
+input:focus{
+    box-shadow: 2px 2px 2px gray;
+}
