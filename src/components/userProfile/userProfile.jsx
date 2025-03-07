@@ -41,40 +41,53 @@ export default function userProfile() {
 
   return (
     <div className="userProfile">
-      <input
-        type="file"
-        accept="image/*"
-        ref={inputRef}
-        onChange={handleImageChange}
-        hidden
-      />
-      <img
-        className="profilePicture"
-        src={userDetails.profilePic}
-        alt=""
-        onClick={() => {
-          inputRef.current.click();
-        }}
-      />
+      <nav>
+        <div className="profife-cointainer">
+          <input
+            type="file"
+            accept="image/*"
+            ref={inputRef}
+            onChange={handleImageChange}
+            hidden
+          />
+          <img
+            className="profilePicture"
+            src={userDetails.profilePic}
+            alt=""
+            onClick={() => {
+              inputRef.current.click();
+            }}
+          />
+          .<h2>{userDetails.name}</h2>
+          <h2>{userDetails.email}</h2>
+        </div>
+      </nav>
 
-      <h2>{userDetails.name}</h2>
-      <h2>{userDetails.email}</h2>
+      <form className="profile-info" onSubmit={handleSubmit}>
+        <div className="box-layout-coinntainer">
+          <p>Full name</p>
+          <input
+            type="text"
+            id="jobRole"
+            value={userDetails.jobRole}
+            onChange={handleDetailChange}
+          />
+        </div>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          id="jobRole"
-          value={userDetails.jobRole}
-          onChange={handleDetailChange}
-        />
-        <input
-          type="text"
-          id="mobile"
-          value={userDetails.mobile}
-          onChange={handleDetailChange}
-        />
-
-        <button type="submit">Submit</button>
+        <div className="box-layout-coinntainer">
+          <p>Mobile Number</p>
+          <input
+            type="text"
+            id="mobile"
+            value={userDetails.mobile}
+            onChange={handleDetailChange}
+          />
+        </div>
+        <div className="profile-submit-cointainer">
+          <button type="submit" className="profile-submit">
+            Submit
+          </button>
+        </div>
       </form>
     </div>
   );
