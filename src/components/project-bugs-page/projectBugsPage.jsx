@@ -1,71 +1,92 @@
 import React, { useEffect, useState } from "react";
 import "./projectBugsPage.css";
+import { Link } from "react-router-dom";
 
-export default function projectBugsPage() {
+export default function projectBugsPage(projectId) {
   const [apibug, setapibug] = useState({});
   const [bugdata, setbugdata] = useState([]);
 
   const bugFromAPI = {
     bugdata: [
       {
+        id: 0,
         Title: "Error Title",
         priority: "High",
-        bugimage: "https://studio.uxpincdn.com/studio/wp-content/uploads/2023/03/reactjs-websites-1024x512.png.webp",
-        content:
-          "Lorem ipsum dolor sit amet consue tempora m incidunt nam dolore amet atque rem impedit molestias laborum quisquam, iusto odi nemo et debitis quo eum necessitatibus, nostrum cum nesciunt possimus asperiores? Autem dolorum dolor voluptatum facere repudiandae aperiam voluptas molestias veniam vel, kamal solu laboriosam quos repellendus facilis ad modi quae dicta consequuntur molestiae officia discitationem quidem? Quo",
+        bugimage:
+          "https://studio.uxpincdn.com/studio/wp-content/uploads/2023/03/reactjs-websites-1024x512.png.webp",
+        content: "Lorem ipsum dolor sit amet consue tempora...",
       },
       {
+        id: 1,
         Title: "Error Title",
         priority: "Medium",
-        bugimage: "https://studio.uxpincdn.com/studio/wp-content/uploads/2023/03/reactjs-websites-1024x512.png.webp",
+        bugimage:
+          "https://studio.uxpincdn.com/studio/wp-content/uploads/2023/03/reactjs-websites-1024x512.png.webp",
         content:
-          " vitae accusamus dolorum exercitationem quidem? Quo Lorem ipsum dolor sit amet consectetur adipisicing elitnihil fugiat nulla. Quam perspiciatis fugiat omnis sapientvoluptate eius voluptates, eveniet quia corrupti aut mollitiadoloremque quas recusandae ipsam impedit neque tempora quo quos,delectus ex! Qui assumenda fugit nobis vitae quidem incidunt nam dolore amet atque rem impedit molestias laborum quisquam, iusto odi nemo et debitis quo eum necessitatibus, nostrum cum nesciunt possimus asperiores? Autem dolorum dolor voluptatum facere repudiandae aperiam voluptas molestias veniam vel, kamal solu laboriosam quos repellendus facilis ad modi quae dicta consequuntur molestiae officia distinctio in fuga ut nostrum. Labore",
+          "Vitae accusamus dolorum exercitationem quidem? Quo Lorem ipsum...",
       },
       {
+        id: 2,
         Title: "Error Title",
         priority: "Low",
-        bugimage: "https://studio.uxpincdn.com/studio/wp-content/uploads/2023/03/reactjs-websites-1024x512.png.webp",
+        bugimage:
+          "https://studio.uxpincdn.com/studio/wp-content/uploads/2023/03/reactjs-websites-1024x512.png.webp",
         content:
-          " vitae accusamus dolorum exercitationem quidem? Quo Lorem ipsum dolor sit amet consectetur adipisicing elitnihil fugiat nulla. Quam perspiciatis fugiat omnis sapientvoluptate eius voluptates, eveniet quia corrupti aut mollitiadoloremque quas recusandae ipsam impedit neque tempora quo quos,delectus ex! Qui assumenda fugit nobis vitae quidem incidunt nam dolore amet atque rem impedit moin fuga ut nostrum. Labore",
+          "Vitae accusamus dolorum exercitationem quidem? Quo Lorem ipsum...",
       },
       {
+        id: 3,
         Title: "Error Title",
         priority: "High",
-        bugimage: "https://studio.uxpincdn.com/studio/wp-content/uploads/2023/03/reactjs-websites-1024x512.png.webp",
+        bugimage:
+          "https://studio.uxpincdn.com/studio/wp-content/uploads/2023/03/reactjs-websites-1024x512.png.webp",
         content:
-          " vitae accusamus  Qutae quidem inciduntolorum dolor voluptatum facere repudiandae aperiam voluptas molestias veniam vel, kamal solu laboriosam quos repellendus facilis ad modi quae dicta consequuntur molestiae officia distinctio in fuga ut nostrum. Labore",
+          "Vitae accusamus Qutae quidem inciduntolorum dolor voluptatum...",
       },
       {
-        Title:
-          "Consectetur adipisicing elitnihil fugiat nulla. Quam perspiciatis fugiat omnis sapientvoluptate eius voluptates, eveniet quia corrupti aut mollitiadoloremque quas recusandae ipsam impedit neque tempora quo quos,delectus ex! Qui assumenda fugit nobis vitae quidem incidunt nam dolore amet atque rem impedit molestias laborum quisquam, iusto odi nemo et debitis quo eum necessitatibus, nostrum cum nesciunt possimus asperiores? Autem dolorum dolor voluptatum facere repudiandae aperiam voluptas molestias veniam vel, kamal solu laboriosam quos repellendus facilis ad modi quae dicta consequuntur molestiae officia distinctio in fuga ut nostrum. Labore vitae accusamus dolorum exercitationem quidem? Qu",
+        id: 4,
+        Title: "Stack Overflow Error",
         priority: "High",
-        bugimage: "https://studio.uxpincdn.com/studio/wp-content/uploads/2023/03/reactjs-websites-1024x512.png.webp",
+        bugimage:
+          "https://studio.uxpincdn.com/studio/wp-content/uploads/2023/03/reactjs-websites-1024x512.png.webp",
         content:
-          " vitae accusamus dolorum exercitationem quidem? Quo Lorem ipsum dolor sit amet consectetur adipisicing elitnihil fugiat nulla. Quam perspiciatis fugiat omnis sapientvoluptate eius voluptates, eveniet quia corrupti aut mollitiadoloremque quas recusandae ipsam impedit neque tempora quo quos,delectus ex! Qui assumenda fugit nobis vitae quidem incidunt nam dolore amet atque rem impedit molestias laborum quisquam, iusto odi nemo et debitis quo eum necessitatibus, nostrum cum nesciunt possimus asperiores? Autem dolorum dolor voluptatum facere repudiandae aperiam voluptas molestias veniam vel, kamal solu laboriosam quos repellendus facilis ad modi quae dicta consequuntur molestiae officia distinctio in fuga ut nostrum. Labore",
+          "Vitae accusamus dolorum exercitationem quidem? Quo Lorem ipsum...",
       },
       {
-        Title:
-          "Consectetur adipisicing elitnihil fugiat nulla. Quam perspiciatis fugiat omnis sapientvoluptate eius voluptates, eveniet quia corrupti aut mollitiadoloremque quas recusandae ipsam impedit neque tempora quo quos,delectus ex! Qui assumenda fugit nobis vitae quidem incidunt nam dolore amet atque rem impedit molestias laborum quisquam, iusto odi nemo et debitis quo eum necessitatibus, nostrum cum nesciunt possimus asperiores? Autem dolorum dolor voluptatum facere repudiandae aperiam voluptas molestias veniam vel, kamal solu laboriosam quos repellendus facilis ad modi quae dicta consequuntur molestiae officia distinctio in fuga ut nostrum. Labore vitae accusamus dolorum exercitationem quidem? Qu",
+        id: 5,
+        Title: "Syntax Error",
         priority: "High",
-        bugimage: "https://studio.uxpincdn.com/studio/wp-content/uploads/2023/03/reactjs-websites-1024x512.png.webp",
+        bugimage:
+          "https://studio.uxpincdn.com/studio/wp-content/uploads/2023/03/reactjs-websites-1024x512.png.webp",
         content:
-          " vitae accusamus dolorum exercitationem quidem? Quo Lorem ipsum dolor sit amet consectetur adipisicing elitnihil fugiat nulla. Quam perspiciatis fugiat omnis sapientvoluptate eius voluptates, eveniet quia corrupti aut mollitiadoloremque quas recusandae ipsam impedit neque tempora quo quos,delectus ex! Qui assumenda fugit nobis vitae quidem incidunt nam dolore amet atque rem impedit molestias laborum quisquam, iusto odi nemo et debitis quo eum necessitatibus, nostrum cum nesciunt possimus asperiores? Autem dolorum dolor voluptatum facere repudiandae aperiam voluptas molestias veniam vel, kamal solu laboriosam quos repellendus facilis ad modi quae dicta consequuntur molestiae officia distinctio in fuga ut nostrum. Labore",
+          "Vitae accusamus dolorum exercitationem quidem? Quo Lorem ipsum...",
       },
       {
-        Title:
-          "Consectetur adipisicing elitnihil fugiat nulla. Quam perspiciatis fugiat omnis sapientvoluptate eius voluptates, eveniet quia corrupti aut mollitiadoloremque quas recusandae ipsam impedit neque tempora quo quos,delectus ex! Qui assumenda fugit nobis vitae quidem incidunt nam dolore amet atque rem impedit molestias laborum quisquam, iusto odi nemo et debitis quo eum necessitatibus, nostrum cum nesciunt possimus asperiores? Autem dolorum dolor voluptatum facere repudiandae aperiam voluptas molestias veniam vel, kamal solu laboriosam quos repellendus facilis ad modi quae dicta consequuntur molestiae officia distinctio in fuga ut nostrum. Labore vitae accusamus dolorum exercitationem quidem? Qu",
+        id: 6,
+        Title: "Unhandled Exception",
         priority: "High",
-        bugimage: "https://studio.uxpincdn.com/studio/wp-content/uploads/2023/03/reactjs-websites-1024x512.png.webp",
+        bugimage:
+          "https://studio.uxpincdn.com/studio/wp-content/uploads/2023/03/reactjs-websites-1024x512.png.webp",
         content:
-          " vitae accusamus dolorum exercitationem quidem? Quo Lorem ipsum dolor sit amet consectetur adipisicing elitnihil fugiat nulla. Quam perspiciatis fugiat omnis sapientvoluptate eius voluptates, eveniet quia corrupti aut mollitiadoloremque quas recusandae ipsam impedit neque tempora quo quos,delectus ex! Qui assumenda fugit nobis vitae quidem incidunt nam dolore amet atque rem impedit molestias laborum quisquam, iusto odi nemo et debitis quo eum necessitatibus, nostrum cum nesciunt possimus asperiores? Autem dolorum dolor voluptatum facere repudiandae aperiam voluptas molestias veniam vel, kamal solu laboriosam quos repellendus facilis ad modi quae dicta consequuntur molestiae officia distinctio in fuga ut nostrum. Labore",
+          "Vitae accusamus dolorum exercitationem quidem? Quo Lorem ipsum...",
       },
       {
-        Title:
-          "Consectetur adipisicing elitnihil fugiat nulla. Quam perspiciatis fugiat omnis sapientvoluptate eius voluptates, eveniet quia corrupti aut mollitiadoloremque quas recusandae ipsam impedit neque tempora quo quos,delectus ex! Qui assumenda fugit nobis vitae quidem incidunt nam dolore amet atque rem impedit molestias laborum quisquam, iusto odi nemo et debitis quo eum necessitatibus, nostrum cum nesciunt possimus asperiores? Autem dolorum dolor voluptatum facere repudiandae aperiam voluptas molestias veniam vel, kamal solu laboriosam quos repellendus facilis ad modi quae dicta consequuntur molestiae officia distinctio in fuga ut nostrum. Labore vitae accusamus dolorum exercitationem quidem? Qu",
+        id: 7,
+        Title: "Null Pointer Exception",
         priority: "High",
-        bugimage: "https://studio.uxpincdn.com/studio/wp-content/uploads/2023/03/reactjs-websites-1024x512.png.webp",
+        bugimage:
+          "https://studio.uxpincdn.com/studio/wp-content/uploads/2023/03/reactjs-websites-1024x512.png.webp",
         content:
-          " vitae accusamus dolorum exercitationem quidem? Quo Lorem ipsum dolor sit amet consectetur adipisicing elitnihil fugiat nulla. Quam perspiciatis fugiat omnis sapientvoluptate eius voluptates, eveniet quia corrupti aut mollitiadoloremque quas recusandae ipsam impedit neque tempora quo quos,delectus ex! Qui assumenda fugit nobis vitae quidem incidunt nam dolore amet atque rem impedit molestias laborum quisquam, iusto odi nemo et debitis quo eum necessitatibus, nostrum cum nesciunt possimus asperiores? Autem dolorum dolor voluptatum facere repudiandae aperiam voluptas molestias veniam vel, kamal solu laboriosam quos repellendus facilis ad modi quae dicta consequuntur molestiae officia distinctio in fuga ut nostrum. Labore",
+          "Vitae accusamus dolorum exercitationem quidem? Quo Lorem ipsum...",
+      },
+      {
+        id: 8,
+        Title: "Memory Leak Issue",
+        priority: "High",
+        bugimage:
+          "https://studio.uxpincdn.com/studio/wp-content/uploads/2023/03/reactjs-websites-1024x512.png.webp",
+        content:
+          "Vitae accusamus dolorum exercitationem quidem? Quo Lorem ipsum...",
       },
     ],
   };
@@ -84,18 +105,22 @@ export default function projectBugsPage() {
     <div className="project">
       <h2>Bug Tracker</h2>
       <div className="bug-cointainer">
-        {bugdata.map((ele, ind) => (
-          <div className="bug-box">
-            <div className="bug-box-head">
-              <nav>
-                <p>{ele.Title}</p>
-                <h3>{ele.priority}</h3>
-              </nav>
-              <img src={ele.bugimage} />
-            </div>
-            <div className="bug-discription">{ele.content}</div>
-          </div>
-        ))}
+        {bugdata.length > 0 ? (
+          bugdata.map((ele, ind) => (
+            <Link to={`/bug-detalis/${ele.id}`} className="bug-box" key={ind}>
+              <div className="bug-box-head">
+                <nav>
+                  <p>{ele.Title}</p>
+                  <h3>{ele.priority}</h3>
+                </nav>
+                <img src={ele.bugimage} />
+              </div>
+              <div className="bug-discription">{ele.content}</div>
+            </Link>
+          ))
+        ) : (
+          <p>No Bugs</p>
+        )}
       </div>
     </div>
   );

@@ -9,6 +9,7 @@ import ApplyLeave from "../apply-leave/applyLeave";
 import UserProfile from "../userProfile/userProfile";
 import { logout } from "../../redux/authSlice";
 import { useDispatch } from "react-redux";
+import ProjectBugsPage from "../project-bugs-page/projectBugsPage";
 
 export default function body({
   expanded,
@@ -18,10 +19,18 @@ export default function body({
   user,
   setCurrentPage,
 }) {
+
+  const [projectId,setProjectId]=useState(0)
+
   const dispatch = useDispatch();
 
   function handleSignOut() {
     dispatch(logout());
+  }
+
+  function openProjectBugsPage(proId){
+    setCurrentPage("projectBugsPage")
+    setProjectId(proId)
   }
 
   return (
@@ -104,11 +113,13 @@ export default function body({
         ) : currentPage == "onboarding" ? (
           <Onboard />
         ) : currentPage == "project" ? (
-          <Project />
+          <Project openProjectBugsPage={openProjectBugsPage} />
         ) : currentPage == "payslip" ? (
           <Payslip />
         ) : currentPage === "applyLeave" ? (
           <ApplyLeave />
+        ) : currentPage === "projectBugsPage" ? (
+          <ProjectBugsPage projectId={projectId} />
         ) : (
           <UserProfile />
         )}

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./project.css";
-import { Link } from "react-router-dom";
-export default function project() {
+export default function project({ openProjectBugsPage }) {
   const [apiproject, setapiproject] = useState({});
   const [project, setproject] = useState([]);
 
@@ -124,30 +123,36 @@ export default function project() {
               </tr>
             </thead>
             <tbody>
-              {project.map((ele, ind) => (
-                <tr key={ind}>
-                  <td className="table-line" id="black">
-                    {ind + 1}
-                  </td>
-                  <td className="table-line">
-                    <abbr title={ele.ProjectName}>
-                      {ele.ProjectName.length < 19
-                        ? ele.ProjectName
-                        : ele.ProjectName.slice(0, 16) + "..."}
-                    </abbr>
-                  </td>
-                  <td className="table-line">{ele.BugCount}</td>
-                  <td className="table-line">{ele.Assignedby}</td>
-                  <td className="table-line">
-                    <Link
-                      to={"/project-bugs/" + ele.ProjectId}
-                      className="view-project"
-                    >
-                      View
-                    </Link>
-                  </td>
-                </tr>
-              ))}
+              {project.length > 0 ? (
+                project.map((ele, ind) => (
+                  <tr key={ind}>
+                    <td className="table-line" id="black">
+                      {ind + 1}
+                    </td>
+                    <td className="table-line">
+                      <abbr title={ele.ProjectName}>
+                        {ele.ProjectName.length < 19
+                          ? ele.ProjectName
+                          : ele.ProjectName.slice(0, 16) + "..."}
+                      </abbr>
+                    </td>
+                    <td className="table-line">{ele.BugCount}</td>
+                    <td className="table-line">{ele.Assignedby}</td>
+                    <td className="table-line">
+                      <button
+                        onClick={() => {
+                          openProjectBugsPage(ele.ProjectId);
+                        }}
+                        className="view-project"
+                      >
+                        View
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <p>No Bugs</p>
+              )}
             </tbody>
           </table>
         </div>
