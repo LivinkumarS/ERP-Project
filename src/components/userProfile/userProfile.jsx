@@ -65,7 +65,7 @@ export default function userProfile() {
 
       <form className="profile-info" onSubmit={handleSubmit}>
         <div className="box-layout-coinntainer">
-          <p>Full name</p>
+          <p>Job role</p>
           <input
             type="text"
             id="jobRole"
@@ -83,6 +83,7 @@ export default function userProfile() {
             onChange={handleDetailChange}
           />
         </div>
+
         <div className="profile-submit-cointainer">
           <button type="submit" className="profile-submit">
             Submit

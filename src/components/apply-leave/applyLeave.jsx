@@ -181,8 +181,8 @@ export default function applyLeave() {
           </div>
           <div className="monthly-leave-cointainer">
             <p>Leave available for current month</p>
-            <div className="sick-leave-m">Sick Leave = 2 </div>
-            <div className="casual-leave-m">Casual Leave = 2 </div>
+            <div className="sick-leave-m">Sick Leave = 1 </div>
+            <div className="casual-leave-m">Casual Leave = 1 </div>
           </div>
         </div>
       </div>
