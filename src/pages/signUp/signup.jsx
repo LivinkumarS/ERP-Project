@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/authSlice";
 import { Link } from "react-router-dom";
+import siteLogo from "../../assets/signin/sitelogo.png";
 
 export default function signup() {
   const navigate = useNavigate();
@@ -45,7 +46,7 @@ export default function signup() {
     <div>
       <form className="signup-page">
         <div className="signup-img">
-          <img src="src/assets/signin/sitelogo.png" />
+          <img src={siteLogo} />
         </div>
         <div className="signup-form">
           <div className="signup-cointained">
