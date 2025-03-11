@@ -1,0 +1,201 @@
+.bugDetailPage {
+  padding: 15px;
+  background: linear-gradient(135deg, hsl(240, 33%, 97%), hsl(240, 40%, 90%));
+  width: 100vw;
+  height: 100vh;
+  overflow: scroll;
+  animation: fadeIn 0.6s ease-in-out;
+}
+.bugDetailPage::-webkit-scrollbar {
+  display: none;
+}
+
+/* Container */
+.bugdetail-cointainer {
+  width: 100%;
+  display: flex;
+  padding: 15px;
+  gap: 15px;
+}
+
+/* Left Section */
+.bugDetail-left {
+  width: 50%;
+  height: 100%;
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+}
+.bugDetail-left:hover {
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Right Section */
+.bugDetail-right {
+  width: 50%;
+  height: 100%;
+  padding: 15px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+}
+.bugDetail-right:hover {
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Error Image Container */
+.error-img-cointainer {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.error-img {
+  width: 45%;
+  height: auto;
+  padding: 10px;
+  border-radius: 15px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+.error-img:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Error Description */
+.bugdetail-cointainer > .bugDetail-left > .error-description {
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #333;
+  line-height: 1.5;
+  background: #f9f9f9;
+  border-left: 4px solid #41528a;
+  padding-left: 15px;
+  border-radius: 5px;
+}
+
+/* Status Selection */
+.error-state {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+}
+.error-state select {
+  padding: 5px;
+  border-radius: 5px;
+  border: 2px solid #41528a;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.error-state select:hover {
+  background: #41528a;
+  color: white;
+}
+
+/* Chat Section */
+.chat-cointainer {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.chat-cointainer > h4 {
+  margin-bottom: 10px;
+}
+
+/* Chat Box */
+.chat-box {
+  width: 95%;
+  min-height: 400px;
+
+  background: #fff;
+  margin: auto;
+  position: relative;
+  border-radius: 5px 5px 23px 23px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  box-sizing: border-box;
+  animation: fadeInUp 0.5s ease-in-out;
+}
+
+/* Input Container */
+.input-chat-cointainer {
+  width: 100%;
+  border-radius: 20px;
+  background: hsl(240, 2%, 92%);
+  position: absolute;
+  display: flex;
+  bottom: 0;
+  padding: 10px;
+  align-items: center;
+  justify-content: space-between;
+  border: 2px solid gray;
+  box-sizing: border-box;
+}
+
+/* Chat Input */
+.chat-input {
+  margin: 0 10px;
+  flex: 1;
+  border: 0;
+  background: transparent;
+  color: black;
+}
+.chat-input:focus {
+  outline: none;
+}
+
+/* Send & Sticker Icons */
+.send-logo,
+.sticker-logo {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+.send-logo:hover,
+.sticker-logo:hover {
+  transform: scale(1.1);
+}
+
+/* Sticker Icon */
+.sticker-logo {
+  fill: gray;
+}
+
+/* Send Icon */
+.send-logo {
+  fill: rgba(77, 227, 7, 0.722);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
