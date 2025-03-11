@@ -117,6 +117,23 @@
 .bug-cointainer::-webkit-scrollbar-thumb:hover {
   background: #888;
 }
+.priority {
+  color: black;
+}
+.priority-symbol {
+  margin-left: 5px;
+  width: 16px;
+  height: 16px;
+}
+.priority-high {
+  fill: red;
+}
+.priority-medium {
+  fill: rgba(255, 255, 0, 0.803);
+}
+.priority-low {
+  fill: blue;
+}
 
 /* Media Query */
 
