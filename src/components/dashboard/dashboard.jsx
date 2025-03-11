@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "./dashboard.css";
+import siteSmallLogo from "../../assets/Dashboard/small-sitelogo.png";
+import siteLogo from "../../assets/Dashboard/sitelogo.png";
 
 export default function Dashboard({ expanded, setCurrentPage, currentPage }) {
   return (
     <div className={`dashboard-container ${expanded ? "dashboard-short" : ""}`}>
       <div className="sitelogo">
-        {!expanded && (
-          <img src="src/assets/Dashboard/sitelogo.png" alt="Site Logo" />
-        )}
+        {!expanded && <img src={siteLogo} alt="Site Logo" />}
         {expanded && (
-          <img
-            src="src/assets/Dashboard/small-sitelogo.png"
-            alt="Site Logo"
-            id="small-logo"
-          />
+          <img src={siteSmallLogo} alt="Site Logo" id="small-logo" />
         )}
       </div>
       {!expanded && <nav className="menu-name">MENU</nav>}
