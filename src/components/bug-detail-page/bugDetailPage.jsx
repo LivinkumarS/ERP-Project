@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./bugDetailPage.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function bugDetailPage() {
+  const navigate = useNavigate();
+
   const { errorId } = useParams();
   const [apiResponse, setApiResponse] = useState(null);
   const [errorImg, setErrorImg] = useState([]);
@@ -25,6 +27,7 @@ export default function bugDetailPage() {
 
   const dataFromApi = {
     errorData: {
+      projectTitle: "ERP-Client Management",
       errorId: "12345",
       errorTitle: "Database connection timeout",
       errorDescription:
@@ -87,7 +90,10 @@ export default function bugDetailPage() {
 
   return (
     <div className="bugDetailPage">
-      <h2>Project Title</h2>
+      <div className="titleCont">
+        <h2>{apiResponse && apiResponse.errorData.projectTitle}</h2>
+        <button onClick={() => navigate(-1)}>Goback</button>
+      </div>
       <div className="bugdetail-cointainer">
         <div className="bugDetail-left">
           <h3>{apiResponse && apiResponse.errorData.errorTitle}</h3>

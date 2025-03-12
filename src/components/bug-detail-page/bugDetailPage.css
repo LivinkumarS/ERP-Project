@@ -6,6 +6,34 @@
   overflow: scroll;
   animation: fadeIn 0.6s ease-in-out;
 }
+
+.bugDetailPage > .titleCont {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.bugDetailPage > .titleCont > button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 7px 10px;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.bugDetailPage > .titleCont > button:hover {
+  background-color: #0056b3;
+}
+
+.bugDetailPage > .titleCont > button:active {
+  background-color: #00408f;
+}
+
 .bugDetailPage::-webkit-scrollbar {
   display: none;
 }
@@ -104,12 +132,11 @@
   color: white;
 }
 
-
-.chat-cointainer{
+.chat-cointainer {
   margin-top: 30px;
 }
 
-.chat-cointainer>.chat-box>.error-title{
+.chat-cointainer > .chat-box > .error-title {
   margin-bottom: 20px;
 }
 
