@@ -1,65 +1,102 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./bugDetailPage.css";
 import { useParams } from "react-router-dom";
 
 export default function bugDetailPage() {
   const { errorId } = useParams();
+  const [apiResponse, setApiResponse] = useState(null);
+  const [errorImg, setErrorImg] = useState([]);
+  const [errorDes, setErrorDesc] = useState("");
 
-  const apiResponse = {};
+  const [comments, setComments] = useState([]);
+  const [commentText, setCommentText] = useState("");
+
+  useEffect(() => {
+    setApiResponse(dataFromApi);
+  }, []);
+
+  useEffect(() => {
+    if (apiResponse) {
+      setErrorDesc(apiResponse.errorData.errorDescription);
+      setErrorImg(apiResponse.errorData.errorImages);
+      setComments(apiResponse.commentSectionData.comments);
+    }
+  }, [apiResponse]);
+
+  const dataFromApi = {
+    errorData: {
+      errorId: "12345",
+      errorTitle: "Database connection timeout",
+      errorDescription:
+        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Provident perspiciatis commodi ea veritatis repellat dolorem eaque voluptatum tempora incidunt omnis doloremque, repudiandae fugit quo illum ratione. Quae, nisi numquam dolore eligendi optio est, aliquam quas soluta suscipit tempore praesentium unde impedit repellendus, magnam officia esse perspiciatis minima. Harum facere libero distinctio ea, consequatur eum aliquam corrupti illum, numquam culpa modi. Ex hic tempora modi animi perspiciatis, amet distinctio cupiditate vitae cum ipsum numquam sapiente ipsa rem blanditiis delectus rerum odio, atque nostrum laborum consectetur accusantium nihil aspernatur quam culpa. Veniam cupiditate excepturi necessitatibus voluptatem nihil totam officia, nemo, deserunt unde quaerat inventore, natus enim dolore quae velit quo ipsum perferendis quidem. Cupiditate et adipisci architecto unde, nam ipsa aperiam fugit incidunt laborum accusamus, asperiores, quod ipsum! Voluptate numquam atque quia adipisci, excepturi aspernatur cum suscipit culpa? Eum, esse praesentium. Autem ullam earum fuga eligendi quidem minus vero cum facere expedita?",
+      errorImages: [
+        "https://studio.uxpincdn.com/studio/wp-content/uploads/2023/03/reactjs-websites-1024x512.png.webp",
+        "https://studio.uxpincdn.com/studio/wp-content/uploads/2023/03/reactjs-websites-1024x512.png.webp",
+        "https://studio.uxpincdn.com/studio/wp-content/uploads/2023/03/reactjs-websites-1024x512.png.webp",
+      ],
+    },
+
+    commentSectionData: {
+      comments: [
+        {
+          commentId: "cmt1",
+          user: {
+            userId: "dev123",
+            name: "John Doe",
+            role: "Developer",
+            avatar:
+              "https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png",
+          },
+          message:
+            "I have checked the logs, and it seems like the DB server is overloaded.",
+          timestamp: "2024-03-12T10:15:00Z",
+          replies: [
+            {
+              replyId: "rpl1",
+              user: {
+                userId: "usr456",
+                name: "Alice Smith",
+                role: "Reporter",
+                avatar:
+                  "https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png",
+              },
+              message: "Is there a workaround for now?",
+              timestamp: "2024-03-12T10:20:00Z",
+            },
+          ],
+        },
+        {
+          commentId: "cmt2",
+          user: {
+            userId: "dev789",
+            name: "Mike Johnson",
+            role: "Developer",
+            avatar:
+              "https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png",
+          },
+          message:
+            "We might need to increase the connection pool size. I'll push an update soon.",
+          timestamp: "2024-03-12T11:00:00Z",
+          replies: [],
+        },
+      ],
+    },
+  };
+
+  function handleSendComment() {}
 
   return (
     <div className="bugDetailPage">
       <h2>Project Title</h2>
       <div className="bugdetail-cointainer">
         <div className="bugDetail-left">
-          <h3>Error Title</h3>
+          <h3>{apiResponse && apiResponse.errorData.errorTitle}</h3>
           <nav className="error-img-cointainer">
-            <img
-              className="error-img"
-              src="https://studio.uxpincdn.com/studio/wp-content/uploads/2023/03/reactjs-websites-1024x512.png.webp"
-            />
-            <img
-              className="error-img"
-              src="https://studio.uxpincdn.com/studio/wp-content/uploads/2023/03/reactjs-websites-1024x512.png.webp"
-            />
-            <img
-              className="error-img"
-              src="https://studio.uxpincdn.com/studio/wp-content/uploads/2023/03/reactjs-websites-1024x512.png.webp"
-            />
-            <img
-              className="error-img"
-              src="https://studio.uxpincdn.com/studio/wp-content/uploads/2023/03/reactjs-websites-1024x512.png.webp"
-            />
-            <img
-              className="error-img"
-              src="https://studio.uxpincdn.com/studio/wp-content/uploads/2023/03/reactjs-websites-1024x512.png.webp"
-            />
+            {errorImg.map((ele, ind) => (
+              <img className="error-img" src={ele} key={ind} />
+            ))}
           </nav>
-          <div className="error-description">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit
-            reiciendis numquam similique dolores dignissimos, voluptatum nihil
-            rerum cum accusamus maxime id commodi molestiae quos voluptate
-            delectus quis magnam voluptatem esse velit natus eaque, eos
-            laboriosam maiores unde? Id veniam cupiditate ad molestiae,
-            voluptatem et in ut repellat a sit fuga alias perferendis tempora
-            dolorum eveniet aliquam praesentium saepe blanditiis sequi esse rem
-            quos incidunt illum iste. Minus incidunt illo aliquid quidem
-            nesciunt distinctio quod enim doloremque, rem voluptatum omnis iure
-            cum optio mollitia accusamus cumque voluptate. Praesentium quidem
-            voluptates veniam odio molestias quibusdam consequatur illo, quod a
-            fugiat qui omnis! Praesentdunt illum iste. Minus incidunt illo
-            aliquid quidem nesciunt distinctio quod enim doloremque, rem
-            voluptatum omnis iure cum optio mollitia accusamus cumque voluptate.
-            Praesentium quidem voluptates veniam odio molestias quibusdam
-            consequatur illo, quod a fugiat qui omnis! Praesentium cupiditate,
-            beatae itaque tempore fugiat vero numquam, neque deserunt
-            voluptatibus rem quod error reprehenderit iste aliquid,
-            exercitationem totam! Sed odio, animi harum cupiditate aliquam
-            asperiores. Perspiciatis ducimus praesentium, officiis, nihil
-            veritatis culpa beatae esse id laboriosam sapiente in! Soluta,
-            ipsum. Placeat ducimus veniam sequi tempore quisquam, magni deleniti
-            saepe.
-          </div>
+          <div className="error-description">{errorDes}</div>
         </div>
         <div className="bugDetail-right">
           <div className="error-state">
@@ -72,21 +109,68 @@ export default function bugDetailPage() {
             </select>
           </div>
           <nav className="chat-cointainer">
-            <h4>Chat with teating kamal </h4>
             <div className="chat-box">
-              <div className="input-chat-cointainer">
-                <svg
-                  className="sticker-logo"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 448 512"
-                >
-                  <path d="M64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l224 0 0-112c0-26.5 21.5-48 48-48l112 0 0-224c0-35.3-28.7-64-64-64L64 32zM448 352l-45.3 0L336 352c-8.8 0-16 7.2-16 16l0 66.7 0 45.3 32-32 64-64 32-32z" />
-                </svg>
+              <h3 className="error-title">
+                {apiResponse && apiResponse.errorData.errorTitle}
+              </h3>
 
-                <input className="chat-input" type="text" required />
+              <div className="comments-container">
+                {comments.map((comment) => (
+                  <div key={comment.commentId} className="comment">
+                    <div className="comment-header">
+                      <img
+                        src={comment.user.avatar}
+                        alt={comment.user.name}
+                        className="avatar"
+                      />
+                      <span className="user-name">
+                        {comment.user.name} ({comment.user.role})
+                      </span>
+                    </div>
+                    <p className="comment-message">{comment.message}</p>
+                    <span className="comment-time">
+                      {new Date(comment.timestamp).toLocaleString()}
+                    </span>
+
+                    {comment.replies.length > 0 && (
+                      <div className="replies">
+                        {comment.replies.map((reply) => (
+                          <div key={reply.replyId} className="reply">
+                            <div className="reply-header">
+                              <img
+                                src={reply.user.avatar}
+                                alt={reply.user.name}
+                                className="avatar"
+                              />
+                              <span className="user-name">
+                                {reply.user.name} ({reply.user.role})
+                              </span>
+                            </div>
+                            <p className="reply-message">{reply.message}</p>
+                            <span className="reply-time">
+                              {new Date(reply.timestamp).toLocaleString()}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              <div className="input-chat-container">
+                <input
+                  className="chat-input"
+                  type="text"
+                  placeholder="Write a comment..."
+                  value={commentText}
+                  onChange={(e) => setCommentText(e.target.value)}
+                  required
+                />
 
                 <svg
                   className="send-logo"
+                  onClick={handleSendComment}
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 512 512"
                 >
