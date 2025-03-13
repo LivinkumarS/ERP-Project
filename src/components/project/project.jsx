@@ -151,7 +151,7 @@ export default function project({ openProjectBugsPage }) {
                   </tr>
                 ))
               ) : (
-                <p>No Bugs</p>
+                <tr><td>No Bugs</td></tr>
               )}
             </tbody>
           </table>
