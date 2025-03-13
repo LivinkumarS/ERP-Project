@@ -10,6 +10,7 @@ import UserProfile from "../userProfile/userProfile";
 import { logout } from "../../redux/authSlice";
 import { useDispatch } from "react-redux";
 import ProjectBugsPage from "../project-bugs-page/projectBugsPage";
+import Dashboard from "../dashboard/dashboard";
 
 export default function body({
   expanded,
@@ -19,8 +20,7 @@ export default function body({
   user,
   setCurrentPage,
 }) {
-
-  const [projectId,setProjectId]=useState(0)
+  const [projectId, setProjectId] = useState(0);
 
   const dispatch = useDispatch();
 
@@ -28,9 +28,9 @@ export default function body({
     dispatch(logout());
   }
 
-  function openProjectBugsPage(proId){
-    setCurrentPage("projectBugsPage")
-    setProjectId(proId)
+  function openProjectBugsPage(proId) {
+    setCurrentPage("projectBugsPage");
+    setProjectId(proId);
   }
 
   return (
@@ -106,7 +106,9 @@ export default function body({
         </div>
       </div>
       <div className="sub-body">
-        {currentPage == "task" ? (
+        {currentPage == "dashboard" ? (
+          <Dashboard />
+        ) : currentPage == "task" ? (
           <Task />
         ) : currentPage == "attendance" ? (
           <Attendance />
@@ -120,8 +122,10 @@ export default function body({
           <ApplyLeave />
         ) : currentPage === "projectBugsPage" ? (
           <ProjectBugsPage projectId={projectId} />
-        ) : (
+        ) : currentPage === "userProfile" ? (
           <UserProfile />
+        ) : (
+          <p></p>
         )}
       </div>
     </div>

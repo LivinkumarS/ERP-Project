@@ -193,6 +193,14 @@
 }
 
 /* Replies */
+
+.reply-header{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 10px;
+}
+
 .replies {
   margin-top: 10px;
   padding-left: 15px;

@@ -16,6 +16,7 @@ export default function task() {
   const dataFromAPI = {
     taskData: [
       {
+        taskId:0,
         name: "ERC",
         status: "In Progress",
         start_date: "Sat Feb 01 2025 09:00:00 GMT+0530 (India Standard Time)",
@@ -24,6 +25,7 @@ export default function task() {
         priority: "high",
       },
       {
+        taskId:1,
         name: "ESC",
         status: "In Progress",
         start_date: "Sat Feb 01 2025 09:00:00 GMT+0530 (India Standard Time)",
@@ -35,7 +37,7 @@ export default function task() {
     taskSummary: {
       not_started: 2,
       in_progress: 2,
-      completed: 0,
+      completed: 1,
       awaiting_feedback: 3,
     },
   };

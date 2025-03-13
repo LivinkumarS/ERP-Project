@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Dashboard from "../../components/dashboard/dashboard";
+import MainSidebar from "../../components/mainSidebar/mainSidebar";
 import Body from "../../components/body/body";
 import { Navigate, useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -16,7 +16,7 @@ export default function userDashboard() {
   const [showSidebar, setShowSidebar] = useState(false);
 
   useEffect(() => {
-    setCurrentPage(searchParam.get("tab") || "task");
+    setCurrentPage(searchParam.get("tab") || "dashboard");
   }, [searchParam]);
 
   const updateCurrentPage = (tab) => {
@@ -26,7 +26,7 @@ export default function userDashboard() {
 
   return isAuthenticated ? (
     <div className="userDashboard">
-      <Dashboard
+      <MainSidebar
         expanded={expanded}
         currentPage={currentPage}
         setCurrentPage={updateCurrentPage}
