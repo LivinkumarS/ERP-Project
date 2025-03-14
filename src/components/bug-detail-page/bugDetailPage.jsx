@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./bugDetailPage.css";
 import { useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function bugDetailPage() {
   const navigate = useNavigate();
+  const { user } = useSelector((state) => state.auth);
 
   const { errorId } = useParams();
   const [apiResponse, setApiResponse] = useState(null);
@@ -12,6 +14,12 @@ export default function bugDetailPage() {
 
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState("");
+
+  const [writeReply, setWriteReply] = useState(false);
+  const [replyCommentId, setReplyCommentId] = useState("");
+  const [replyCommentUser, setReplyCommentUser] = useState("");
+  const [replyCommnetText, setReplyCommentText] = useState("");
+  const replyRef = useRef(0);
 
   useEffect(() => {
     setApiResponse(dataFromApi);
@@ -86,7 +94,67 @@ export default function bugDetailPage() {
     },
   };
 
-  function handleSendComment() {}
+  function handleSendComment() {
+    setComments((prev) => {
+      prev.push({
+        commentId: crypto.randomUUID(),
+        user: {
+          userId: user.id,
+          name: user.name,
+          role: user.jobRole,
+          avatar: user.profilePic,
+        },
+        message: commentText,
+        timestamp: new Date().toISOString(),
+        replies: [],
+      });
+
+      return prev;
+    });
+
+    setCommentText("");
+  }
+  function handleReplyComment() {
+    const index = comments.findIndex((ele) => {
+      return ele.commentId === replyCommentId;
+    });
+
+    setComments((prev) => {
+      prev[index].replies.push({
+        replyId: crypto.randomUUID(),
+        user: {
+          userId: user.id,
+          name: user.name,
+          role: user.jobRole,
+          avatar: user.profilePic,
+        },
+        message: replyCommnetText,
+        timestamp: new Date().toISOString(),
+      });
+
+      console.log(prev);
+
+      return prev;
+    });
+
+    setReplyCommentText("");
+    setReplyCommentId("");
+    setReplyCommentUser("");
+    setWriteReply("");
+  }
+
+  function handleDeleteComment(cmtId) {
+    setComments((prev) => {
+      const temp = prev.filter((ele) => {
+        return ele.commentId !== cmtId;
+      });
+      return temp;
+    });
+  }
+
+  function handleDeleteReplyComment() {
+    
+  }
 
   return (
     <div className="bugDetailPage">
@@ -134,9 +202,29 @@ export default function bugDetailPage() {
                       </span>
                     </div>
                     <p className="comment-message">{comment.message}</p>
-                    <span className="comment-time">
+                    <div className="comment-time">
                       {new Date(comment.timestamp).toLocaleString()}
-                    </span>
+                      <span
+                        onClick={async () => {
+                          await setWriteReply(true);
+                          await setReplyCommentId(comment.commentId);
+                          await setReplyCommentUser(comment.user.name);
+                          replyRef.current.focus();
+                        }}
+                      >
+                        reply
+                      </span>
+                      {comment.user.userId === user.id && (
+                        <span
+                          className="delete"
+                          onClick={() => {
+                            handleDeleteComment(comment.commentId);
+                          }}
+                        >
+                          delete
+                        </span>
+                      )}
+                    </div>
 
                     {comment.replies.length > 0 && (
                       <div className="replies">
@@ -155,6 +243,14 @@ export default function bugDetailPage() {
                             <p className="reply-message">{reply.message}</p>
                             <span className="reply-time">
                               {new Date(reply.timestamp).toLocaleString()}
+                              {reply.user.userId === user.id && (
+                                <span
+                                  className="delete"
+                                  onClick={handleDeleteReplyComment}
+                                >
+                                  delete
+                                </span>
+                              )}
                             </span>
                           </div>
                         ))}
@@ -165,18 +261,50 @@ export default function bugDetailPage() {
               </div>
 
               <div className="input-chat-container">
-                <input
-                  className="chat-input"
-                  type="text"
-                  placeholder="Write a comment..."
-                  value={commentText}
-                  onChange={(e) => setCommentText(e.target.value)}
-                  required
-                />
+                {writeReply && (
+                  <div className="reply-indicator">
+                    <p>
+                      Replying to <span>{replyCommentUser}</span>
+                    </p>
+                    <svg
+                      onClick={() => {
+                        setWriteReply(false);
+                      }}
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="24px"
+                      viewBox="0 -960 960 960"
+                      width="24px"
+                      fill="#5f6368"
+                    >
+                      <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                    </svg>
+                  </div>
+                )}
+
+                {writeReply ? (
+                  <input
+                    className="chat-input"
+                    type="text"
+                    placeholder="Write reply comment..."
+                    value={replyCommnetText}
+                    onChange={(e) => setReplyCommentText(e.target.value)}
+                    required
+                    ref={replyRef}
+                  />
+                ) : (
+                  <input
+                    className="chat-input"
+                    type="text"
+                    placeholder="Write a comment..."
+                    value={commentText}
+                    onChange={(e) => setCommentText(e.target.value)}
+                    required
+                  />
+                )}
 
                 <svg
                   className="send-logo"
-                  onClick={handleSendComment}
+                  onClick={writeReply ? handleReplyComment : handleSendComment}
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 512 512"
                 >

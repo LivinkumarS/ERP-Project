@@ -84,9 +84,17 @@ export default function dashboard() {
       { name: "Jan", present: 12, absent: 8 },
       { name: "Feb", present: 20, absent: 2 },
       { name: "Mar", present: 6, absent: 1 },
+      { name: "Apr", present: 12, absent: 8 },
+      { name: "May", present: 20, absent: 2 },
+      { name: "Jun", present: 6, absent: 1 },
+      { name: "Jul", present: 12, absent: 8 },
+      { name: "Aug", present: 20, absent: 2 },
+      { name: "Sep", present: 6, absent: 1 },
+      { name: "Oct", present: 12, absent: 8 },
+      { name: "Nov", present: 20, absent: 2 },
+      { name: "Dec", present: 6, absent: 1 },
     ],
   };
-
 
   return (
     <div className="dashboard">
@@ -121,7 +129,7 @@ export default function dashboard() {
 
         {/* Bar Chart */}
         <div className="chart">
-          <ResponsiveContainer  height={350}>
+          <ResponsiveContainer height={350}>
             <BarChart
               data={attendanceData}
               margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
